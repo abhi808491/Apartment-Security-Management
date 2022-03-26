@@ -88,6 +88,7 @@ public class GardsTranningService implements GardsTranningServiceInt {
 		PageRequest paging = PageRequest.of((int)pageNo,(int) pageSize);
 		Page<GardsTranningEntity> pagedResult =gardsTranningDAOInt.findAll(paging);
 		return pagedResult.getContent();
+		
 	}
 
 }
