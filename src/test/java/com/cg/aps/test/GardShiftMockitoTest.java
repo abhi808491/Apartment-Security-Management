@@ -44,9 +44,10 @@ class GardShiftMockitoTest {
 		gard.setTime("7AM");
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardShiftDAOInt.save(gard)).thenReturn(gard);
+		long id = gardShiftServ.add(gard);
 		assertEquals("Ranjan", gard.getCreatedBy());
 		assertEquals("Ankit", gard.getModifiedBy());
-		assertEquals(5, gard.getId());
+		assertEquals(id, gard.getId());
 	}
 
 	@Test

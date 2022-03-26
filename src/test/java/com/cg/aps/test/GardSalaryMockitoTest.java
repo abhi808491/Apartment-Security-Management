@@ -45,9 +45,10 @@ class GardSalaryMockitoTest {
 		gard.setAmount(22000);
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardSalaryDAOInt.save(gard)).thenReturn(gard);
+		Long id=gardSalaryServ.add(gard);
 		assertEquals("Ranjan", gard.getCreatedBy());
 		assertEquals("Ankit", gard.getModifiedBy());
-		assertEquals(5, gard.getId());
+		assertEquals(id, gard.getId());
 		assertEquals("101", gard.getUserId());
 		assertEquals("Arun", gard.getName());
 
