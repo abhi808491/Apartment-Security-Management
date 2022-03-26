@@ -17,7 +17,7 @@ public class DeliveryTest {
 	@Autowired
 	DeliveryServiceInt deliveryServ;
 	@Test
-	void addTest() throws DuplicateRecordException
+	void addTest() 
 	{
 		DeliveryEntity delivery=new DeliveryEntity();
 		delivery.setId(130);

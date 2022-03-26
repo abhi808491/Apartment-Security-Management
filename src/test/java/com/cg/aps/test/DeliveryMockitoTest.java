@@ -2,8 +2,6 @@ package com.cg.aps.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;

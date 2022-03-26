@@ -1,9 +1,6 @@
 package com.cg.aps.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +28,7 @@ public class DomesticHelpMockitoTest {
 		MockitoAnnotations.openMocks(this);
 	}
 	@Test
-	void addDeliveryTest() throws ParseException
+	void addDeliveryTest()
 	{
 		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
 		domesticHelp.setId(1);
@@ -50,7 +47,7 @@ public class DomesticHelpMockitoTest {
 		assertEquals(1,num);	
 	}
 	@Test
-	void updateDeliveryTest() throws ParseException
+	void updateDeliveryTest() 
 	{
 		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
 		domesticHelp.setId(1);
@@ -70,7 +67,7 @@ public class DomesticHelpMockitoTest {
 		assertEquals("Ramesh",domesticHelp.getOwnerName());	
 	}
 	@Test
-	void findByNameTest() throws ParseException
+	void findByNameTest() 
 	{
 
 		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
@@ -90,7 +87,7 @@ public class DomesticHelpMockitoTest {
 		assertEquals("Ramesh",delEnt.getOwnerName());
 	}
 	@Test
-	void findByPkTest() throws ParseException
+	void findByPkTest() 
 	{
 		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
 		domesticHelp.setId(1);
