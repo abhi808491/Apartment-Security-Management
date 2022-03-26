@@ -1,9 +1,12 @@
 package com.cg.aps.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.cg.aps.entity.GardShiftEntity;
@@ -16,80 +19,75 @@ import com.cg.aps.repository.GardsTranningDAOInt;
 public class GardsTranningService implements GardsTranningServiceInt {
 
 	@Autowired
-	GardsTranningDAOInt gardsTranningRepo;
-	@Override
-	public long add(GardsTranningEntity bean) {
-		Optional<GardsTranningEntity> gard=gardsTranningRepo.findById(bean.getId());
-		if(gard.isPresent())
-		{
-			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
-		}
-		gardsTranningRepo.save(bean);
-		//System.out.println(gard);
-		//System.out.println(bean);
-		return bean.getId();
-		}
+	GardsTranningDAOInt gardsTranningDAOInt;
 
 	@Override
-	public void update(GardsTranningEntity bean) 
-	{
-		Optional<GardsTranningEntity> gard=gardsTranningRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+	public long add(GardsTranningEntity bean) {
+		Optional<GardsTranningEntity> gard =gardsTranningDAOInt.findById(bean.getId());
+		if (gard.isPresent()) {
+			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
+		}
+		gardsTranningDAOInt.save(bean);
+		// System.out.println(gard);
+		// System.out.println(bean);
+		return bean.getId();
+	}
+
+	@Override
+	public void update(GardsTranningEntity bean) {
+		Optional<GardsTranningEntity> gard = gardsTranningDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		gardsTranningRepo.save(bean);
+		gardsTranningDAOInt.save(bean);
 	}
 
 	@Override
 	public void delete(GardsTranningEntity bean) {
-		Optional<GardsTranningEntity> gard=gardsTranningRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+		Optional<GardsTranningEntity> gard =gardsTranningDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		gardsTranningRepo.delete(bean);
-		
-	}
+		gardsTranningDAOInt.delete(bean);
 
-	
+	}
 
 	@Override
 	public GardsTranningEntity findByPk(long id) {
-		Optional<GardsTranningEntity> gard=gardsTranningRepo.findById(id);
-		if(!gard.isPresent())
-		{
-			throw new RecordNotFoundException("Record with the given ID is not found ="+ id);
+		Optional<GardsTranningEntity> gard = gardsTranningDAOInt.findById(id);
+		if (!gard.isPresent()) {
+			throw new RecordNotFoundException("Record with the given ID is not found =" + id);
 		}
-		return gardsTranningRepo.getById(id);
-		
+		return gardsTranningDAOInt.getById(id);
+
 	}
+
 	@Override
-	public GardsTranningEntity search(GardsTranningEntity bean) {
-		Optional<GardsTranningEntity> gard=gardsTranningRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+	public List<GardsTranningEntity> search(GardsTranningEntity bean) {
+		Optional<GardsTranningEntity> gard = gardsTranningDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		return gardsTranningRepo.getById(bean.getId());
+		GardsTranningEntity newGard = gardsTranningDAOInt.getById(bean.getId());
+		List<GardsTranningEntity> al = new ArrayList();
+		al.add(newGard);
+		return al;
 	}
 
 	@Override
 	public GardsTranningEntity getByName(String name) {
-		GardsTranningEntity gard=gardsTranningRepo.getByName(name);
-		if(gard==null)
-		{
-			throw new RecordNotFoundException("Record not found with given name found in the database = " +name);
+		GardsTranningEntity gard = gardsTranningDAOInt.findByName(name);
+		if (gard == null) {
+			throw new RecordNotFoundException("Record not found with given name found in the database = " + name);
 		}
-		return gardsTranningRepo.getByName(name);
+		return gardsTranningDAOInt.findByName(name);
 	}
-
 
 	@Override
 	public List<GardsTranningEntity> search(GardsTranningEntity bean, long pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		PageRequest paging = PageRequest.of((int)pageNo,(int) pageSize);
+		Page<GardsTranningEntity> pagedResult =gardsTranningDAOInt.findAll(paging);
+		return pagedResult.getContent();
 	}
 
-	
 }

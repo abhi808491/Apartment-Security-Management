@@ -1,8 +1,12 @@
 package com.cg.aps.controller;
 
+import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,56 +16,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.aps.entity.GardShiftEntity;
-import com.cg.aps.entity.GardsTranningEntity;
 import com.cg.aps.service.GardShiftServiceInt;
 
 @RestController
 public class GardShiftController {
 	@Autowired
 	GardShiftServiceInt gardShiftServ;
-	
-	//add new gard
+
+	// add new gard
 	@PostMapping("/addgardshift")
-	public long add(@RequestBody GardShiftEntity bean)
-	{
-		gardShiftServ.add(bean);
-		return bean.getId();
+	public ResponseEntity<Long> add(@Valid @RequestBody GardShiftEntity bean) {
+		Long id = gardShiftServ.add(bean);
+		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
-	//search gard
+
+	// search gard
 	@PostMapping("/searchgard")
-	public GardShiftEntity search(@RequestBody GardShiftEntity bean)
-	{
-		return gardShiftServ.search(bean);
+	public ResponseEntity<List<GardShiftEntity>> search(@RequestBody GardShiftEntity bean) {
+
+		List<GardShiftEntity> al = gardShiftServ.search(bean);
+		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
-	
-	//get gard bypk
+
+	// get gard bypk
 	@GetMapping("/getgard/pk/{id}")
-	public GardShiftEntity findByPk(@PathVariable("id") long id)
-	{
-		return gardShiftServ.findByPk(id);
+	public ResponseEntity<GardShiftEntity> findByPk(@PathVariable("id") long id) {
+		return new ResponseEntity<GardShiftEntity>(gardShiftServ.findByPk(id), HttpStatus.OK);
 	}
-	
-	//get by name
+
+	// get by name
 	@GetMapping("/getgard/name/{name}")
-	public GardShiftEntity findByName(@PathVariable("name") String name)
-	{
-		return gardShiftServ.getByName(name);
+	public ResponseEntity<GardShiftEntity> findByName(@Valid @PathVariable("name") String name) {
+		return new ResponseEntity<GardShiftEntity>(gardShiftServ.getByName(name), HttpStatus.OK);
 	}
-	
-	//update gard
+
+	// update gard
 	@PatchMapping("/updategardshift")
-	public void update(@RequestBody GardShiftEntity bean)
-	{
+	public void update(@Valid @RequestBody GardShiftEntity bean) {
 		gardShiftServ.update(bean);
 	}
-	
-	//delete gard
+
+	// delete gard
 	@DeleteMapping("/deletegards")
-	public void delete(@RequestBody GardShiftEntity bean)
-	{
+	public void delete(@RequestBody GardShiftEntity bean) {
 		gardShiftServ.delete(bean);
 	}
-	
-	
 
 }

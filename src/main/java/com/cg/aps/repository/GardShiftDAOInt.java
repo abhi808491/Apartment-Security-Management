@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.cg.aps.entity.GardShiftEntity;
 
 @Repository
-public interface GardShiftDAOInt  extends JpaRepository<GardShiftEntity,Long>{
+public interface GardShiftDAOInt extends JpaRepository<GardShiftEntity, Long> {
 	@Query("select n from GardShiftEntity n where n.name=:nname")
-	public GardShiftEntity getByName(@Param("nname") String name);
-	
+	public GardShiftEntity findByName(@Param("nname") String name);
+
 }

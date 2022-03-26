@@ -2,7 +2,11 @@ package com.cg.aps.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,46 +22,43 @@ import com.cg.aps.service.GardSalaryServiceInt;
 public class GardSalaryController {
 	@Autowired
 	GardSalaryServiceInt gardSalaryServ;
-	
-	//seraching  gard
-		@PostMapping("/getgards")
-		public GardSalaryEntity search(@RequestBody GardSalaryEntity bean)
-		{
-			return gardSalaryServ.search(bean);
-		}
-	
-	//add gards
-	@PostMapping("/addgard")
-	public long add(@RequestBody GardSalaryEntity bean)
-	{
-		return gardSalaryServ.add(bean);
+
+	// serach gard
+	@PostMapping("/getgards")
+	public ResponseEntity<List<GardSalaryEntity>> search(@RequestBody GardSalaryEntity bean) {
+		List<GardSalaryEntity> al = gardSalaryServ.search(bean);
+		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
-	//get gards by PK
-		@GetMapping("/getgardsbyId/{id}")
-		public GardSalaryEntity findByPk(@PathVariable("id") long id)
-		{
-			return gardSalaryServ.findByPk(id);
-		}
-		//get gards by name
-		@GetMapping("/getgardsbyname/{name}")
-		public GardSalaryEntity getByName(@PathVariable("name") String name)
-		{
-			return gardSalaryServ.findByName(name);
-		}
-		
-		//update gards
-		@PatchMapping("/updategard")
-		public void update(@RequestBody GardSalaryEntity bean)
-		{
-			gardSalaryServ.update(bean);
-		}
-		
-		//delete gards
-		@DeleteMapping("/deletegard")
-		public void delete(@RequestBody  GardSalaryEntity bean)
-		{
-			gardSalaryServ.delete(bean);
-		}
-		
-		
+
+	// add gards
+	@PostMapping("/addgard")
+	public ResponseEntity<Long> add(@Valid @RequestBody GardSalaryEntity bean) {
+		Long id = gardSalaryServ.add(bean);
+		return new ResponseEntity<Long>(id, HttpStatus.OK);
+	}
+
+	// get gards by PK
+	@GetMapping("/getgardsbyId/{id}")
+	public ResponseEntity<GardSalaryEntity> findByPk(@PathVariable("id") long id) {
+		return new ResponseEntity<GardSalaryEntity>(gardSalaryServ.findByPk(id), HttpStatus.OK);
+	}
+
+	// get gards by name
+	@GetMapping("/getgardsbyname/{name}")
+	public ResponseEntity<GardSalaryEntity> getByName(@PathVariable("name") String name) {
+		return new ResponseEntity<GardSalaryEntity>(gardSalaryServ.findByName(name), HttpStatus.OK);
+	}
+
+	// update gards
+	@PatchMapping("/updategard")
+	public void update(@Valid @RequestBody GardSalaryEntity bean) {
+		gardSalaryServ.update(bean);
+	}
+
+	// delete gards
+	@DeleteMapping("/deletegard")
+	public void delete(@RequestBody GardSalaryEntity bean) {
+		gardSalaryServ.delete(bean);
+	}
+
 }

@@ -9,47 +9,43 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.cg.aps.entity.ErrorResponse;
 
-
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler  {
-	
+public class RestResponseEntityExceptionHandler {
+
 	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> handelException(DatabaseException exception)
-	{
-		ErrorResponse error=new ErrorResponse();
-		error.setMessage(exception.getMessage());
-		error.setTimeStamp(LocalDateTime.now());
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
-	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> handelException(DuplicateRecordException exception)
-	{
-		ErrorResponse error=new ErrorResponse();
-		error.setMessage(exception.getMessage());
-		error.setTimeStamp(LocalDateTime.now());
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
-	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> handelException(RecordNotFoundException exception)
-	{
-		ErrorResponse error=new ErrorResponse();
-		error.setMessage(exception.getMessage());
-		error.setTimeStamp(LocalDateTime.now());
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
-	@ExceptionHandler
-	public ResponseEntity <ErrorResponse> handelException(ApplicationException exception)
-	{
-		ErrorResponse error=new ErrorResponse();
+	public ResponseEntity<ErrorResponse> handelException(DatabaseException exception) {
+		ErrorResponse error = new ErrorResponse();
 		error.setMessage(exception.getMessage());
 		error.setTimeStamp(LocalDateTime.now());
 		error.setStatus(HttpStatus.NOT_FOUND.value());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler
+	public ResponseEntity<ErrorResponse> handelException(DuplicateRecordException exception) {
+		ErrorResponse error = new ErrorResponse();
+		error.setMessage(exception.getMessage());
+		error.setTimeStamp(LocalDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 
+	@ExceptionHandler
+	public ResponseEntity<ErrorResponse> handelException(RecordNotFoundException exception) {
+		ErrorResponse error = new ErrorResponse();
+		error.setMessage(exception.getMessage());
+		error.setTimeStamp(LocalDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<ErrorResponse> handelException(ApplicationException exception) {
+		ErrorResponse error = new ErrorResponse();
+		error.setMessage(exception.getMessage());
+		error.setTimeStamp(LocalDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 
 }

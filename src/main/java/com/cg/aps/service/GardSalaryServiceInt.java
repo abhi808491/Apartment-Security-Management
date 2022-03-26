@@ -18,6 +18,6 @@ public interface GardSalaryServiceInt {
 
 	public List<GardSalaryEntity> search(GardSalaryEntity bean, long pageNo, int pageSize);
 
-	public GardSalaryEntity search(GardSalaryEntity bean);
+	public List<GardSalaryEntity> search(GardSalaryEntity bean);
 
 }

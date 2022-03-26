@@ -1,5 +1,6 @@
 package com.cg.aps.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,59 +15,54 @@ import com.cg.aps.repository.GardShiftDAOInt;
 @Service
 public class GardShiftService implements GardShiftServiceInt {
 	@Autowired
-	GardShiftDAOInt gardShiftRepo;
+	GardShiftDAOInt gardShiftDAOInt;
 
 	@Override
 	public long add(GardShiftEntity bean) {
-		Optional<GardShiftEntity> gard=gardShiftRepo.findById(bean.getId());
-		if(gard.isPresent())
-		{
+		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
+		if (gard.isPresent()) {
 			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
 		}
-		gardShiftRepo.save(bean);
+		gardShiftDAOInt.save(bean);
 		return bean.getId();
 	}
 
 	@Override
 	public void update(GardShiftEntity bean) {
-		Optional<GardShiftEntity> gard=gardShiftRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		gardShiftRepo.save(bean);
+		gardShiftDAOInt.save(bean);
 
 	}
 
 	@Override
 	public void delete(GardShiftEntity bean) {
-		Optional<GardShiftEntity> gard=gardShiftRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-			gardShiftRepo.delete(bean);
+		gardShiftDAOInt.delete(bean);
 
 	}
 
 	@Override
 	public GardShiftEntity getByName(String name) {
-		GardShiftEntity gard=gardShiftRepo.getByName(name);
-		if(gard==null)
-		{
-			throw new RecordNotFoundException("Record not found with given name found in the database = " +name);
+		GardShiftEntity gard = gardShiftDAOInt.findByName(name);
+		if (gard == null) {
+			throw new RecordNotFoundException("Record not found with given name found in the database = " + name);
 		}
-		return gardShiftRepo.getByName(name);
+		return gardShiftDAOInt.findByName(name);
 	}
 
 	@Override
 	public GardShiftEntity findByPk(long id) {
-		Optional<GardShiftEntity> gard=gardShiftRepo.findById(id);
-		if(!gard.isPresent())
-		{
-			throw new RecordNotFoundException("Record not found with given Id =" +id);
+		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(id);
+		if (!gard.isPresent()) {
+			throw new RecordNotFoundException("Record not found with given Id =" + id);
 		}
-		return gardShiftRepo.getById(id);
+		return gardShiftDAOInt.getById(id);
 	}
 
 	@Override
@@ -76,13 +72,15 @@ public class GardShiftService implements GardShiftServiceInt {
 	}
 
 	@Override
-	public GardShiftEntity search(GardShiftEntity bean) {
-		Optional<GardShiftEntity> gard=gardShiftRepo.findById(bean.getId());
-		if(!gard.isPresent())
-		{
+	public List<GardShiftEntity> search(GardShiftEntity bean) {
+		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
+		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		return gardShiftRepo.getById(bean.getId());
+		GardShiftEntity newGard = gardShiftDAOInt.getById(bean.getId());
+		List<GardShiftEntity> al = new ArrayList();
+		al.add(newGard);
+		return al;
 	}
 
 }
