@@ -46,6 +46,7 @@ class GardTranningMockitoTest {
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardsTranningDAOInt.save(gard)).thenReturn(gard);
 		long id = gardsTranningServ.add(gard);
+		assertEquals(id,gard.getId());
 		assertEquals("Ranjan", gard.getCreatedBy());
 		assertEquals("8051148432", gard.getMobileNo());
 
