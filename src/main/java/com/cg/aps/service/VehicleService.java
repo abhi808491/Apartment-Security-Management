@@ -15,7 +15,7 @@ import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.VehicleRepository;
 @Service
-public class VehicleServiceImpl implements VehicleServiceInt{
+public class VehicleService implements VehicleServiceInt{
 	
 	@Autowired
 	VehicleRepository vehRepo;
