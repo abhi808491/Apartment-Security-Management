@@ -18,12 +18,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.repository.VehicleRepository;
-import com.cg.aps.service.VehicleServiceImpl;
+import com.cg.aps.service.VehicleService;
 @SpringBootTest
 
 public class VehicleServiceMockitoTest {
 	@InjectMocks
-	VehicleServiceImpl vehService;
+	VehicleService vehService;
 	@MockBean
 	VehicleRepository vehRepo;
 	@BeforeEach

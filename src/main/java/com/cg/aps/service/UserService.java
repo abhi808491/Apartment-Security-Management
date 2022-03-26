@@ -18,11 +18,11 @@ import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 
 @Service
-public class UserServiceImp implements UserServiceInt{
+public class UserService implements UserServiceInt{
 	
 	@Autowired
 	UserDAOInt userDao;
-	Logger logger = LoggerFactory.getLogger(UserServiceImp.class);
+	Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Override
 	public long add(UserEntity bean) {
 		Optional<UserEntity> user=userDao.findById(bean.getId());

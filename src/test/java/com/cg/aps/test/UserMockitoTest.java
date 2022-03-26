@@ -16,13 +16,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.cg.aps.entity.UserEntity;
 import com.cg.aps.repository.UserDAOInt;
-import com.cg.aps.service.UserServiceImp;
+import com.cg.aps.service.UserService;
 
 @ExtendWith(SpringExtension.class)
 class UserMockitoTest {
 
 	@InjectMocks
-	UserServiceImp userServ;
+	UserService userServ;
 
 	@MockBean
 	UserDAOInt userDAOInt;
