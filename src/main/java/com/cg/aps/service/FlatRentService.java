@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.FlatRentEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
@@ -25,10 +23,10 @@ public class FlatRentService implements FlatRentServiceInt {
 	public long add(FlatRentEntity bean) {
 		Optional<FlatRentEntity> flat =flatrentDAOint.findById(bean.getId());
 		if (flat.isPresent()) {
-			throw new DuplicateRecordException("Record already exists. No duplicate allowed");
+			throw new DuplicateRecordException("Record already exists. No duplicate allowed : "+bean.getId());
 		}
-		flatrentDAOint.save(bean);
-		return bean.getId();
+		FlatRentEntity f = flatrentDAOint.save(bean);
+		return f.getId();
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class FlatRentService implements FlatRentServiceInt {
 		if (!flat.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		flatrentDAOint.delete(bean);
+		flatrentDAOint.delete(flat.get());
 
 	}
 
@@ -54,9 +52,9 @@ public class FlatRentService implements FlatRentServiceInt {
 	public FlatRentEntity findByPk(long id) {
 		Optional<FlatRentEntity> flat = flatrentDAOint.findById(id);
 		if (!flat.isPresent()) {
-			throw new RecordNotFoundException("Record with the given ID is not found =" + id);
+			throw new RecordNotFoundException("Record with the given ID is not found");
 		}
-		return flatrentDAOint.getById(id);
+		return flat.get();
 
 	}
 
@@ -67,18 +65,18 @@ public class FlatRentService implements FlatRentServiceInt {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
 		FlatRentEntity newFlat = flatrentDAOint.getById(bean.getId());
-		List<FlatRentEntity> al = new ArrayList();
+		List<FlatRentEntity> al = new ArrayList<>();
 		al.add(newFlat);
 		return al;
 	}
 
 	@Override
-	public FlatRentEntity findByName(String name) {
-		FlatRentEntity flat = flatrentDAOint.findByName(name);
+	public FlatRentEntity findByOwnerName(String name) {
+		FlatRentEntity flat = flatrentDAOint.findByOwnerName(name);
 		if (flat == null) {
-			throw new RecordNotFoundException("Record not found with given name found in the database = " + name);
+			throw new RecordNotFoundException("Record not found with given name in the database");
 		}
-		return flatrentDAOint.findByName(name);
+		return flat;
 	}
 
 	@Override

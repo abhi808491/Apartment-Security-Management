@@ -44,8 +44,8 @@ public class FlatRentController {
 
 			// get flats by name
 			@GetMapping("/getflatsrent/name/{name}")
-			public ResponseEntity<FlatRentEntity> getByName(@Valid @PathVariable("name") String name) {
-				return new ResponseEntity<FlatRentEntity>(flatrentServ.findByName(name), HttpStatus.OK);
+			public ResponseEntity<FlatRentEntity> getByOwnerName(@Valid @PathVariable("name") String name) {
+				return new ResponseEntity<FlatRentEntity>(flatrentServ.findByOwnerName(name), HttpStatus.OK);
 			}
 
 			// update flats

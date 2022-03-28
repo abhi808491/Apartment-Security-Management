@@ -1,6 +1,7 @@
 package com.cg.aps.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,10 +14,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class FlatRentEntity extends BaseEntity 
 {
-	private String name;
+	private String ownerName;
 	private String flatNo;
 	private String amount;
 	private String type;
+	
+	@OneToOne(mappedBy="flatrent")
+	FlatEntity flat;
 	
 	@Override
 	public String getKey() {
