@@ -25,7 +25,6 @@ public class DomesticHelpService implements DomesticHelpServiceInt{
 		{
 			throw new DuplicateRecordException("Record is already present with id "+bean.getId());
 		}
-		
 		return  domesticHelpDAOInt.save(bean).getId();
 	}
 
@@ -51,13 +50,13 @@ public class DomesticHelpService implements DomesticHelpServiceInt{
 	}
 
 	@Override
-	public DomesticHelpEntity findByName(String name) {
-		DomesticHelpEntity domesticHelpEntity=domesticHelpDAOInt.findByOwnerName(name);
+	public List<DomesticHelpEntity> findByName(String name) {
+		List<DomesticHelpEntity> domesticHelpEntity=domesticHelpDAOInt.findByOwnerName(name);
 		if(domesticHelpEntity==null)
 		{
 			throw new RecordNotFoundException("Record Not Found with Name "+name);
 		}
-		return  domesticHelpEntity;
+		return   domesticHelpEntity;
 	}
 
 	@Override
@@ -95,6 +94,18 @@ public class DomesticHelpService implements DomesticHelpServiceInt{
 		List<DomesticHelpEntity> d = new ArrayList<>();
 		d.add(this.findByPk(bean.getId()));
 		return d;
+	}
+
+	@Override
+	public List<DomesticHelpEntity> getDomesticHelpListByFlat(long id) {
+		// TODO Auto-generated method stub
+		return domesticHelpDAOInt.getDomesticHelpListByFlat(id);
+	}
+
+	@Override
+	public List<DomesticHelpEntity> getDomesticHelpListByGuard(long id) {
+		// TODO Auto-generated method stub
+		return domesticHelpDAOInt.getDomesticHelpsByGuardId(id);
 	}
 
 	
