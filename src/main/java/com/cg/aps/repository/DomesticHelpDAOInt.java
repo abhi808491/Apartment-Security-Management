@@ -14,6 +14,4 @@ public interface DomesticHelpDAOInt extends JpaRepository<DomesticHelpEntity, Lo
 	@Query(value = "select * from domestic_help_entity inner join flat_entity on domestic_help_Entity.flat_id=flat_entity.id where flat_entity.id=:flatId", nativeQuery = true)
 	public List<DomesticHelpEntity> getDomesticHelpListByFlat(@Param("flatId") Long flat_id);
 	
-	@Query(value = "select * from domestic_help_entity inner join gards_Trainee_entity on domestic_help_entity.guard_id= gards_trainee_entity.id where gards_trainee_entity.id=:guardId", nativeQuery = true)
-	public List<DomesticHelpEntity> getDomesticHelpsByGuardId(@Param("guardId") Long guard_id);
 }

@@ -104,11 +104,6 @@ public class DeliveryService implements DeliveryServiceInt{
 		return deliveryDAOInt.getDeliveriesOfFlat(id);
 	}
 
-	@Override
-	public List<DeliveryEntity> getDeliveryListByGuardId(long id) {
-		// TODO Auto-generated method stub
-		return deliveryDAOInt.getDeliveriesByGuardId(id);
-	}
 	
 
 }

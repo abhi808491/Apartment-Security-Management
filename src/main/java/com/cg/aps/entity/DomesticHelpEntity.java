@@ -31,10 +31,7 @@ public class DomesticHelpEntity extends BaseEntity{
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "flat_id", referencedColumnName = "id")
 	private FlatEntity flat;
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name = "guard_id", referencedColumnName = "id")
-	private GardTraineeEntity guard;
+
 	
 	@Override
 	public String getKey() {

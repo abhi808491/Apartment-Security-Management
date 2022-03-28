@@ -3,6 +3,7 @@ package com.cg.aps.service;
 import java.util.List;
 
 import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VisitorEntity;
 
 
 
@@ -19,4 +20,5 @@ public long add(SecurityEntity bean);
 	public List<SecurityEntity> search(SecurityEntity bean, long pageNo, int pageSize);
 	
 	public List<SecurityEntity> search(SecurityEntity bean);
+	public List<SecurityEntity> getSecurityByGard(long id);
 }

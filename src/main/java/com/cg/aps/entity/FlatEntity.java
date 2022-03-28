@@ -38,6 +38,11 @@ public class FlatEntity extends BaseEntity {
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.MERGE)
 	private List<DomesticHelpEntity> domesticHelp;
 
+	@OneToMany(mappedBy = "visitor_flat",cascade = CascadeType.MERGE)
+	@JsonIgnore
+	private List<VisitorEntity> visitorEntity;
+	
+	
 	@Override
 	public String getKey() {
 		return null;

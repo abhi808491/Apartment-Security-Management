@@ -102,12 +102,7 @@ public class DomesticHelpService implements DomesticHelpServiceInt{
 		return domesticHelpDAOInt.getDomesticHelpListByFlat(id);
 	}
 
-	@Override
-	public List<DomesticHelpEntity> getDomesticHelpListByGuard(long id) {
-		// TODO Auto-generated method stub
-		return domesticHelpDAOInt.getDomesticHelpsByGuardId(id);
-	}
-
+	
 	
 
 }

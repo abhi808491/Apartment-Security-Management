@@ -19,5 +19,4 @@ public long add(DeliveryEntity bean);
 
 	List<DeliveryEntity> getDeliveriesByFlatId(long id);
 
-	List<DeliveryEntity> getDeliveryListByGuardId(long id);
 }

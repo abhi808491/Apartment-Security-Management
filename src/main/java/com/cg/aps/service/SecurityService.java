@@ -86,6 +86,12 @@ public class SecurityService implements SecurityServiceInt {
 		lis.add(this.findByPk(bean.getId()));
 		return lis;
 	}
+
+
+	@Override
+	public List<SecurityEntity> getSecurityByGard(long id) {
+		return secRepo.getSecurityByGard(id);
+	}
 	
 	
 	

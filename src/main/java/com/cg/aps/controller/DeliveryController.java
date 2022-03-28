@@ -79,14 +79,6 @@ public class DeliveryController {
 		
 	}
 	
-	//find deliveries By guard
-	@GetMapping("deliveriesByguard/{guardId}")
-	ResponseEntity<List<DeliveryEntity>> getDeliveriesByguardId(@PathVariable("guardId") Long guardId)
-	{
-		List<DeliveryEntity> delEnt=deliveryService.getDeliveryListByGuardId(guardId);
-		return new ResponseEntity<>(delEnt, HttpStatus.OK);
-			
-		}
 	
 	
 }

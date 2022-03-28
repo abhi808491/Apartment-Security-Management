@@ -52,17 +52,11 @@ public class GardTraineeEntity extends BaseEntity {
 	@JoinColumn(name="salary_id")
 	private GardSalaryEntity gardSalary;
 	
-	//relationship between gardtrainee and delivery
+	@OneToMany(mappedBy = "security_gard",cascade = CascadeType.MERGE)
 	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@OneToMany(mappedBy = "guard",cascade = CascadeType.MERGE)
-	private List<DeliveryEntity> deliveryList;
+	private List<SecurityEntity> securityEntity;
 	
-	//relationship between gardtrainee and domesticHelp
-	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@OneToMany(mappedBy = "guard",cascade = CascadeType.MERGE)
-	private List<DomesticHelpEntity> domesticHelpList;
+	
 	@Override
 	public String getKey() {
 		// TODO Auto-generated method stub
