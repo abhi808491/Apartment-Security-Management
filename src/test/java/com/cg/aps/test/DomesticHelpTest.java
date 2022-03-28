@@ -3,6 +3,8 @@ package com.cg.aps.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,17 +81,9 @@ public class DomesticHelpTest {
 	@Test
 	void findByNameTest() 
 	{
-		DomesticHelpEntity newDomesticHelpEnt=domesticHelpServ.findByName("rani");
-		System.out.println(newDomesticHelpEnt);
-		assertEquals("rishitha",newDomesticHelpEnt.getCreatedBy());
-		assertEquals(java.sql.Timestamp.valueOf(" 2022-03-25 14:04:33.228 "),newDomesticHelpEnt.getCreatedDateTime());
-		assertEquals("rishitha",newDomesticHelpEnt.getModifiedBy());
-		assertEquals(java.sql.Timestamp.valueOf("2022-03-25 14:04:33.228"),newDomesticHelpEnt.getModifiedDateTime());
-		assertEquals("rani",newDomesticHelpEnt.getOwnerName());
-		assertEquals("7:00 AM",newDomesticHelpEnt.getArrivalTime());
-		assertEquals("10:00 AM",newDomesticHelpEnt.getDepartureTime());
-		assertEquals("104F",newDomesticHelpEnt.getFlatNo());
-		assertEquals("cooking",newDomesticHelpEnt.getHelpType());
+		List<DomesticHelpEntity> newDomesticHelpEnt=domesticHelpServ.findByName("rani");
+		
+		assertEquals(2,newDomesticHelpEnt.size());
 	}
 	@Test
 	public void DeleteTest() throws RecordNotFoundException{

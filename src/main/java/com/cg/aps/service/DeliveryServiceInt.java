@@ -9,11 +9,15 @@ public long add(DeliveryEntity bean);
 	
 	public void delete(DeliveryEntity bean);
 	
-	public DeliveryEntity findByName(String name);
+	public List<DeliveryEntity> findByName(String name);
 	
 	public DeliveryEntity findByPk(long id);
 	
 	public List<DeliveryEntity> search(long pageNo, int pageSize);
 	
 	public List<DeliveryEntity> search(DeliveryEntity bean);
+
+	List<DeliveryEntity> getDeliveriesByFlatId(long id);
+
+	List<DeliveryEntity> getDeliveryListByGuardId(long id);
 }

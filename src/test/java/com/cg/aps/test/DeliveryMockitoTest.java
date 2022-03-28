@@ -2,6 +2,8 @@ package com.cg.aps.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +32,7 @@ public class DeliveryMockitoTest {
 		MockitoAnnotations.openMocks(this);
 	}
 	@Test
-	void addDeliveryTest() 
+	void addTest() 
 	{
 		DeliveryEntity delivery=new DeliveryEntity();
 		delivery.setId(1);
@@ -47,8 +49,9 @@ public class DeliveryMockitoTest {
 		assertEquals(1,num);	
 	}
 	@Test
-	void updateDeliveryTest() 
+	void updateTest() 
 	{
+		
 		DeliveryEntity delivery=new DeliveryEntity();
 		delivery.setId(1);
 		delivery.setCreatedBy("rishitha");
@@ -56,17 +59,18 @@ public class DeliveryMockitoTest {
 		delivery.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		delivery.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		delivery.setModifiedBy("rishitha");
-		delivery.setOwnerName("Ramesh");
+		delivery.setOwnerName("Ravi");
 		delivery.setStatus("delivered");
 		delivery.setTime("7:00 AM");
 		Mockito.when(deliveryDAOInt.findById((long) 1)).thenReturn(Optional.of(delivery));
 		Mockito.when(deliveryDAOInt.save(delivery)).thenReturn(delivery);
 		deliveryService.update(delivery);
-		assertEquals("Ramesh",delivery.getOwnerName());	
+		assertEquals("Ravi",delivery.getOwnerName());	
 	}
 	@Test
 	void findByNameTest() 
 	{
+		List<DeliveryEntity> deliveryList=new ArrayList();
 		DeliveryEntity delivery=new DeliveryEntity();
 		delivery.setId(100000);
 		delivery.setCreatedBy("rishitha");
@@ -77,9 +81,10 @@ public class DeliveryMockitoTest {
 		delivery.setOwnerName("Ramesh");
 		delivery.setStatus("delivered");
 		delivery.setTime("7:00 AM");
-		Mockito.when(deliveryDAOInt.findByOwnerName("Ramesh")).thenReturn(delivery);
-		DeliveryEntity delEnt=deliveryService.findByName("Ramesh");
-		assertEquals("Ramesh",delEnt.getOwnerName());
+		deliveryList.add(delivery);
+		Mockito.when(deliveryDAOInt.findByOwnerName("Ramesh")).thenReturn(deliveryList);
+		List<DeliveryEntity> delEnt=deliveryService.findByName("Ramesh");
+		assertEquals(1,delEnt.size());
 	}
 	@Test
 	void findByPkTest() 
@@ -104,7 +109,23 @@ public class DeliveryMockitoTest {
 		assertEquals("7:00 AM",delEnt.getTime());
 	}
 	
-	
+	@Test
+	void deleteTest()
+	{
+		DeliveryEntity delivery=new DeliveryEntity();
+		delivery.setId(1);
+		delivery.setCreatedBy("rishitha");
+		delivery.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		delivery.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		delivery.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		delivery.setModifiedBy("rishitha");
+		delivery.setOwnerName("Ramesh");
+		delivery.setStatus("delivered");
+		delivery.setTime("7:00 AM");
+		Mockito.when(deliveryDAOInt.findById((long) 1)).thenReturn(Optional.of(delivery));
+		Mockito.doNothing().when(deliveryDAOInt).delete(delivery);
+		deliveryService.delete(delivery);
+	}
 	
 
 }

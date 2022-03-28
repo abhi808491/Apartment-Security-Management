@@ -53,8 +53,8 @@ public class DeliveryService implements DeliveryServiceInt{
 	}
 
 	@Override
-	public DeliveryEntity findByName(String name) {
-		DeliveryEntity deliveryEntity=deliveryDAOInt.findByOwnerName(name);
+	public List<DeliveryEntity> findByName(String name) {
+		List<DeliveryEntity> deliveryEntity=deliveryDAOInt.findByOwnerName(name);
 		if(deliveryEntity==null)
 		{
 			throw new RecordNotFoundException("Record Not Found with Name "+name);
@@ -97,5 +97,18 @@ public class DeliveryService implements DeliveryServiceInt{
 		d.add(this.findByPk(bean.getId()));
 		return d;
 	}
+
+	@Override
+	public List<DeliveryEntity> getDeliveriesByFlatId(long id) {
+		// TODO Auto-generated method stub
+		return deliveryDAOInt.getDeliveriesOfFlat(id);
+	}
+
+	@Override
+	public List<DeliveryEntity> getDeliveryListByGuardId(long id) {
+		// TODO Auto-generated method stub
+		return deliveryDAOInt.getDeliveriesByGuardId(id);
+	}
+	
 
 }
