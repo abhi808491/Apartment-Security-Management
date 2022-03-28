@@ -32,9 +32,7 @@ public class DeliveryEntity extends BaseEntity {
 	@JoinColumn(name = "flat_id", referencedColumnName = "id")
 	private FlatEntity flat;
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="guard_id",referencedColumnName="id")
-	private GardTraineeEntity guard;
+	
 	@Override
 	public String getKey() {
 		return null;

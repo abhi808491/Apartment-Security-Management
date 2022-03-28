@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.service.SecurityServiceInt;
 
@@ -62,5 +63,14 @@ public class SecurityController {
 			return new ResponseEntity<>(alertList,HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("SecurityByGard/{gardId}")
+	ResponseEntity<List<SecurityEntity>> getSecurityByGardId(@PathVariable("gardId") Long gardId)
+	{
+		List<SecurityEntity> lis= secServ.getSecurityByGard(gardId);
+		return new ResponseEntity<>(lis, HttpStatus.OK);
+		
+	}
+	
 		
 }

@@ -22,6 +22,6 @@ public interface DomesticHelpServiceInt {
 
 	List<DomesticHelpEntity> getDomesticHelpListByFlat(long id);
 
-	List<DomesticHelpEntity> getDomesticHelpListByGuard(long id);
+
 	
 }

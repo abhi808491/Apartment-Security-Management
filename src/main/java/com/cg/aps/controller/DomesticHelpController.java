@@ -77,14 +77,5 @@ public class DomesticHelpController {
 		return new ResponseEntity<>(domEnt, HttpStatus.OK);
 		
 	}
-	//find domesticHelps by guard
-	@GetMapping("domesticHelpByguard/{guardId}")
-	ResponseEntity<List<DomesticHelpEntity>> getguardId(@PathVariable("guardId") Long guardId)
-	{
-		List<DomesticHelpEntity> delEnt=domesticHelpService.getDomesticHelpListByGuard(guardId);
-		return new ResponseEntity<>(delEnt, HttpStatus.OK);
-		
-	}
-
 
 }

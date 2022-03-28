@@ -15,6 +15,4 @@ public interface DeliveryDAOInt extends JpaRepository<DeliveryEntity, Long> {
 	public List<DeliveryEntity> findByOwnerName(String name);
 	@Query(value = "select * from delivery_entity inner join flat_entity on delivery_Entity.flat_id=flat_entity.id where flat_entity.id=:flatId", nativeQuery = true)
 	public List<DeliveryEntity> getDeliveriesOfFlat(@Param("flatId") Long flat_id);
-	@Query(value = "select * from delivery_entity inner join gard_Trainee_entity on delivery_Entity.guard_id= gard_trainee_entity.id where gards_trainee_entity.id=:guardId", nativeQuery = true)
-	public List<DeliveryEntity> getDeliveriesByGuardId(@Param("guardId") Long guard_id);
 }

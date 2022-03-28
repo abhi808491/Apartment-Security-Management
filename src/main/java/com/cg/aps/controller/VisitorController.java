@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.aps.entity.DeliveryEntity;
 import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.service.VisitorServiceInt;
 
@@ -58,4 +59,13 @@ public class VisitorController {
 			visServ.deleteVisitor(visitor);
 			return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
 		}	
+	@GetMapping("visitorByFlat/{flatId}")
+	ResponseEntity<List<VisitorEntity>> getVisitorByFlatId(@PathVariable("flatId") Long flatId)
+	{
+		List<VisitorEntity> lis= visServ.getVisitorByFlatId(flatId);
+		return new ResponseEntity<>(lis, HttpStatus.OK);
+		
+	}
+	
+	
 }

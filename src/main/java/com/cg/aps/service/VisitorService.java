@@ -88,4 +88,10 @@ public class VisitorService implements VisitorServiceInt{
 		return lis;
 	}
 
+
+	@Override
+	public List<VisitorEntity> getVisitorByFlatId(long id) {
+		return visRepo.getVisitorByFlat(id);
+	}
+
 }
