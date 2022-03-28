@@ -66,6 +66,15 @@ return new ResponseEntity<>( HttpStatus.OK);
 	ResponseEntity<List<VehicleEntity>> search(@RequestBody VehicleEntity vehicleEntity) {
 	List<VehicleEntity> domEnt = vehServ.search(vehicleEntity);
 	return new ResponseEntity<>(domEnt, HttpStatus.OK);
+	}
+	
+
+	@GetMapping("VehicleByFlat/{flatId}")
+	ResponseEntity<List<VehicleEntity>> getVehicleByFlatId(@PathVariable("flatId") Long flatId)
+	{
+		List<VehicleEntity> vehEnt=vehServ.getVehicleByFlatId(flatId);
+		return new ResponseEntity<>(vehEnt,HttpStatus.OK);
+	}
 	
 }
-}
+

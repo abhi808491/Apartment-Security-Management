@@ -101,6 +101,26 @@ public class VehicleServiceMockitoTest {
 		VehicleEntity vehEnt=vehService.findByPk(1);
 		assertEquals(1,vehEnt.getId());
 	}
+	@Test
+	void deleteTest()
+	{
+		VehicleEntity d=new VehicleEntity();
+		d.setId(1);
+		d.setCreatedBy("rizwan");
+		d.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		d.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		d.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
+		d.setModifiedBy("rizwan");
+		d.setVehicle_name("ninja");
+		d.setArrivalTime("7:00 AM");
+		d.setDepartureTime("11:00 AM");
+		d.setParkingNo("B12");
+		d.setVehicleNo("AP22T5678");
+		Mockito.when(vehRepo.findById((long) 1)).thenReturn(Optional.of(d));
+		Mockito.doNothing().when(vehRepo).delete(d);
+		vehService.delete(d);
+		
+	}
 	
 	
 
