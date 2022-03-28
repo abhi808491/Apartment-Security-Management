@@ -21,6 +21,8 @@ public interface VehicleServiceInt {
 	public List<VehicleEntity> search(VehicleEntity bean, long pageNo, int pageSize);
 	
 	public List<VehicleEntity> search(VehicleEntity bean);
+
+	public List<VehicleEntity> getVehicleByFlatId(Long flatId);
 	
 	}
 

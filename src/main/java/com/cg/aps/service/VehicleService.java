@@ -106,4 +106,10 @@ public class VehicleService implements VehicleServiceInt{
 		return null;
 	}
 
+	@Override
+	public List<VehicleEntity> getVehicleByFlatId(Long flatId) {
+		// TODO Auto-generated method stub
+		return vehRepo.getVehicleOfFlat(flatId) ;
+	}
+
 }
