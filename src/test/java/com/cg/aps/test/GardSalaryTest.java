@@ -1,6 +1,7 @@
 package com.cg.aps.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.aps.entity.GardSalaryEntity;
+import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.service.GardSalaryServiceInt;
 
 @SpringBootTest
@@ -59,6 +61,10 @@ public class GardSalaryTest {
 	void deleteTest() {
 		GardSalaryEntity gard = gardSalaryServ.findByPk(54);
 		gardSalaryServ.delete(gard);
+		
+		assertThrows(RecordNotFoundException.class, () -> {
+			gardSalaryServ.findByPk(gard.getId());
+		});
 	}
 
 	@Test

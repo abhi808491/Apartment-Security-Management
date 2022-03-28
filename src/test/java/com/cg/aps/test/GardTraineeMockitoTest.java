@@ -13,18 +13,18 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.cg.aps.entity.GardsTranningEntity;
-import com.cg.aps.repository.GardsTranningDAOInt;
-import com.cg.aps.service.GardsTranningService;
+import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.repository.GardTraineeDAOInt;
+import com.cg.aps.service.GardTraineeService;
 
 @ExtendWith(SpringExtension.class)
-class GardTranningMockitoTest {
+class GardTraineeMockitoTest {
 
 	@InjectMocks
-	GardsTranningService gardsTranningServ;
+	GardTraineeService gardsTranningServ;
 
 	@MockBean
-	GardsTranningDAOInt gardsTranningDAOInt;
+	GardTraineeDAOInt gardsTraineeDAOInt;
 
 	@BeforeEach
 	void init() {
@@ -33,7 +33,7 @@ class GardTranningMockitoTest {
 
 	@Test
 	void addTest() {
-		GardsTranningEntity gard = new GardsTranningEntity();
+		GardTraineeEntity gard = new GardTraineeEntity();
 		gard.setId(5);
 		gard.setCreatedBy("Ranjan");
 		gard.setModifiedBy("");
@@ -44,7 +44,7 @@ class GardTranningMockitoTest {
 		gard.setStatus("under training");
 		gard.setTimeing("9AM");
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
-		Mockito.when(gardsTranningDAOInt.save(gard)).thenReturn(gard);
+		Mockito.when(gardsTraineeDAOInt.save(gard)).thenReturn(gard);
 		long id = gardsTranningServ.add(gard);
 		assertEquals(id,gard.getId());
 		assertEquals("Ranjan", gard.getCreatedBy());
@@ -54,7 +54,7 @@ class GardTranningMockitoTest {
 
 	@Test
 	void updateTest() {
-		GardsTranningEntity gard = new GardsTranningEntity();
+		GardTraineeEntity gard = new GardTraineeEntity();
 		gard.setId(6);
 		gard.setCreatedBy("Ranjan");
 		gard.setModifiedBy("");
@@ -66,8 +66,8 @@ class GardTranningMockitoTest {
 		gard.setMobileNo("8051148432");
 		gard.setStatus("under training");
 		gard.setTimeing("9AM");
-		Mockito.when(gardsTranningDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
-		Mockito.when(gardsTranningDAOInt.save(gard)).thenReturn(gard);
+		Mockito.when(gardsTraineeDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
+		Mockito.when(gardsTraineeDAOInt.save(gard)).thenReturn(gard);
 		gardsTranningServ.update(gard);
 		assertEquals("Rahul", gard.getName());
 
@@ -75,7 +75,9 @@ class GardTranningMockitoTest {
 
 	@Test
 	void deleteTest() {
-		GardsTranningEntity gard = new GardsTranningEntity();
+		GardTraineeEntity gard = new GardTraineeEntity();
+		
+		// adding trainee
 		gard.setId(6);
 		gard.setCreatedBy("Ranjan");
 		gard.setModifiedBy("");
@@ -87,14 +89,21 @@ class GardTranningMockitoTest {
 		gard.setMobileNo("8051148432");
 		gard.setStatus("under training");
 		gard.setTimeing("9AM");
-		Mockito.when(gardsTranningDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
+		
+		//handeling void
+		
+		Mockito.when(gardsTraineeDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
+		Mockito.doNothing().when(gardsTraineeDAOInt).delete(gard);
+		
+		//deleteing
 		gardsTranningServ.delete(gard);
+		
 
 	}
 
 	@Test
 	void findByPk() {
-		GardsTranningEntity gard = new GardsTranningEntity();
+		GardTraineeEntity gard = new GardTraineeEntity();
 		gard.setId(6);
 		gard.setCreatedBy("Ranjan");
 		gard.setModifiedBy("");
@@ -106,7 +115,7 @@ class GardTranningMockitoTest {
 		gard.setMobileNo("8051148432");
 		gard.setStatus("under training");
 		gard.setTimeing("9AM");
-		Mockito.when(gardsTranningDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
+		Mockito.when(gardsTraineeDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
 
 	}
 

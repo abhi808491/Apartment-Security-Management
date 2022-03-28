@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.aps.entity.GardShiftEntity;
+import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.service.GardShiftServiceInt;
 
 @RestController
@@ -61,5 +62,14 @@ public class GardShiftController {
 	public void delete(@RequestBody GardShiftEntity bean) {
 		gardShiftServ.delete(bean);
 	}
+	
+	//get page
+	@GetMapping("/shift/{pageNo}/{pageSize}")
+	public ResponseEntity<List<GardShiftEntity>> searchPage(@PathVariable Long pageNo,
+			@PathVariable Integer pageSize) {
+		List<GardShiftEntity> al = gardShiftServ.search( pageNo, pageSize);
+		return new ResponseEntity<>(al, HttpStatus.OK);
+	
 
+}
 }

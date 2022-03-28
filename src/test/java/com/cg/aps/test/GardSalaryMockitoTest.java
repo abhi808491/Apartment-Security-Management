@@ -90,7 +90,13 @@ class GardSalaryMockitoTest {
 		gard.setAmount(22000);
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardSalaryDAOInt.findById((long) 5)).thenReturn(Optional.of(gard));
+		
+		//handling void here
+		Mockito.doNothing().when(gardSalaryDAOInt).delete(gard);
+		
+		//deleteing
 		gardSalaryServ.delete(gard);
+		
 	}
 
 	@Test

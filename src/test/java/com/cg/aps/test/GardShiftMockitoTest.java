@@ -83,6 +83,9 @@ class GardShiftMockitoTest {
 		gard.setTime("7AM");
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardShiftDAOInt.findById((long) 5)).thenReturn(Optional.of(gard));
+		
+		Mockito.doNothing().when(gardShiftDAOInt).delete(gard);
+		
 		gardShiftServ.delete(gard);
 	}
 

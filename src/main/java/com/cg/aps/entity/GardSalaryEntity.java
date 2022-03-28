@@ -2,9 +2,15 @@ package com.cg.aps.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -21,6 +27,9 @@ public class GardSalaryEntity extends BaseEntity {
 	@NotBlank(message = "Status should not be empty")
 	private String status;
 	private Date date;
+	@OneToOne(mappedBy="gardSalary",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private GardTraineeEntity gardsTranning;
 
 	@Override
 	public String getKey() {

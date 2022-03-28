@@ -2,6 +2,7 @@ package com.cg.aps.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.aps.entity.GardShiftEntity;
+import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.service.GardShiftServiceInt;
 
 @SpringBootTest
@@ -62,6 +64,9 @@ public class GardShiftTest {
 	void deleteTest() {
 		GardShiftEntity gardShift = gardShiftServ.findByPk(14);
 		gardShiftServ.delete(gardShift);
+		assertThrows(RecordNotFoundException.class, () -> {
+			gardShiftServ.findByPk(gardShift.getId());
+		});
 	}
 
 	void findByPk() {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.aps.entity.GardSalaryEntity;
+import com.cg.aps.entity.GardShiftEntity;
 import com.cg.aps.service.GardSalaryServiceInt;
 
 @RestController
@@ -61,4 +62,11 @@ public class GardSalaryController {
 		gardSalaryServ.delete(bean);
 	}
 
+	//get page
+		@GetMapping("/salary/{pageNo}/{pageSize}")
+		public ResponseEntity<List<GardSalaryEntity>> searchPage(@PathVariable Long pageNo,
+				@PathVariable Integer pageSize) {
+			List<GardSalaryEntity> al = gardSalaryServ.search( pageNo, pageSize);
+			return new ResponseEntity<>(al, HttpStatus.OK);
+}
 }

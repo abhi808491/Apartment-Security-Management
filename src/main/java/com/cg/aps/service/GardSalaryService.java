@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.cg.aps.entity.GardSalaryEntity;
+import com.cg.aps.entity.GardShiftEntity;
+import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.GardSalaryDAOInt;
@@ -67,9 +71,17 @@ public class GardSalaryService implements GardSalaryServiceInt {
 	}
 
 	@Override
-	public List<GardSalaryEntity> search(GardSalaryEntity bean, long pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GardSalaryEntity> search(long pageNo, int pageSize) {
+		PageRequest paging = PageRequest.of((int) pageNo,pageSize);
+		Page<GardSalaryEntity> pagedResult =gardSalaryDAOInt.findAll(paging);
+		if(pagedResult.hasContent())
+		{
+			return pagedResult.getContent();
+		}
+		else
+		{
+			throw new DatabaseException("DataBase not found");
+		}
 	}
 
 	@Override

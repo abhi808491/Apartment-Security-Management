@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.cg.aps.entity.GardShiftEntity;
+import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.GardShiftDAOInt;
@@ -66,9 +70,17 @@ public class GardShiftService implements GardShiftServiceInt {
 	}
 
 	@Override
-	public List<GardShiftEntity> search(GardShiftEntity bean, long pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GardShiftEntity> search( long pageNo, int pageSize) {
+		PageRequest paging = PageRequest.of((int) pageNo, pageSize);
+		Page<GardShiftEntity> pagedResult =gardShiftDAOInt.findAll(paging);
+		if(pagedResult.hasContent())
+		{
+			return pagedResult.getContent();
+		}
+		else
+		{
+			throw new DatabaseException("DataBase not found");
+		}
 	}
 
 	@Override
@@ -83,4 +95,6 @@ public class GardShiftService implements GardShiftServiceInt {
 		return al;
 	}
 
-}
+	}
+
+

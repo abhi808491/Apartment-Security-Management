@@ -3,6 +3,7 @@ package com.cg.aps.service;
 import java.util.List;
 
 import com.cg.aps.entity.GardShiftEntity;
+import com.cg.aps.entity.GardTraineeEntity;
 
 public interface GardShiftServiceInt {
 
@@ -16,7 +17,7 @@ public interface GardShiftServiceInt {
 
 	public GardShiftEntity findByPk(long id);
 
-	public List<GardShiftEntity> search(GardShiftEntity bean, long pageNo, int pageSize);
+	public List<GardShiftEntity> search( long pageNo, int pageSize);
 
 	public List<GardShiftEntity> search(GardShiftEntity bean);
 
