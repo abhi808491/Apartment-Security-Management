@@ -10,9 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.SecurityEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
+import com.cg.aps.repository.GardTraineeDAOInt;
 import com.cg.aps.repository.SecurityDAOInt;
 
 @Service
@@ -20,6 +22,9 @@ public class SecurityService implements SecurityServiceInt {
 	
 	@Autowired
 	SecurityDAOInt secRepo;
+	
+	@Autowired
+	GardTraineeDAOInt gardRepo;
 
 	@Override
 	public long add(SecurityEntity bean) {
@@ -91,6 +96,15 @@ public class SecurityService implements SecurityServiceInt {
 	@Override
 	public List<SecurityEntity> getSecurityByGard(long id) {
 		return secRepo.getSecurityByGard(id);
+	}
+	
+	@Override
+	public SecurityEntity addRelation(long securityPk, long gardPk) {
+		SecurityEntity sec = secRepo.getById(securityPk);
+		GardTraineeEntity ga = gardRepo.getById(gardPk);
+		sec.setSecurity_gard(ga);
+		secRepo.save(sec);
+		return sec;
 	}
 	
 	

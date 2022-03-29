@@ -72,5 +72,12 @@ public class SecurityController {
 		
 	}
 	
+	@GetMapping("/SecurityToGard/{securityId}/{gardId}")
+	public ResponseEntity<SecurityEntity> addRelation(@PathVariable Long securityId,@PathVariable Long gardId){
+			SecurityEntity security = secServ.addRelation(securityId, gardId);
+			return new ResponseEntity<>(security,HttpStatus.OK);
+}
+	
+	
 		
 }

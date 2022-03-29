@@ -9,9 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
+import com.cg.aps.repository.FlatDAOInt;
 import com.cg.aps.repository.VisitorDAOInt;
 
 @Service
@@ -19,6 +21,9 @@ public class VisitorService implements VisitorServiceInt{
 	
 	@Autowired
 	VisitorDAOInt visRepo;
+	
+	@Autowired 
+	FlatDAOInt flatRepo;
 
 	@Override
 	public long addVisitor(VisitorEntity visitor) {
@@ -94,4 +99,12 @@ public class VisitorService implements VisitorServiceInt{
 		return visRepo.getVisitorByFlat(id);
 	}
 
+	@Override
+	public VisitorEntity addFlatRelationship(long visitorPk, long flatPk) {
+		VisitorEntity vis = visRepo.getById(visitorPk);
+		FlatEntity fl = flatRepo.getById(flatPk);
+		vis.setVisitor_flat(fl);
+		visRepo.save(vis);
+		return vis;
+	}
 }

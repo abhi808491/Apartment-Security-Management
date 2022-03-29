@@ -66,6 +66,11 @@ public class VisitorController {
 		return new ResponseEntity<>(lis, HttpStatus.OK);
 		
 	}
+	@GetMapping("/VisitorToFlat/{visitorId}/{flatId}")
+	public ResponseEntity<VisitorEntity> addFlat(@PathVariable Long visitorId,@PathVariable Long flatId){
+			VisitorEntity visitor = visServ.addFlatRelationship(visitorId, flatId);
+			return new ResponseEntity<>(visitor,HttpStatus.OK);
+}
 	
 	
 }

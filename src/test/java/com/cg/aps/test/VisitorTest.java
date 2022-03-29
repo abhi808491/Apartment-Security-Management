@@ -50,7 +50,7 @@ public class VisitorTest {
 		visitor.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-26 14:36:09.596"));
 		visitor.setModifiedBy("Ateeq");
 		visitor.setArrivalDate(LocalDate.of(2022,03,26));
-		visitor.setDepartureDate(LocalDate.of(20220,03,27));
+		visitor.setDepartureDate(LocalDate.of(2022,03,27));
 		visitor.setFlatNo(401);
 		visitor.setVisitorId(11);
 		visitor.setVisitorName("Rahul");
@@ -61,8 +61,8 @@ public class VisitorTest {
 		assertEquals("Ateeq", newVisitor.getOwnerName());
 		assertEquals("Ateeq", newVisitor.getCreatedBy());
 		assertEquals("Ateeq", newVisitor.getModifiedBy());
-		assertEquals(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"), newVisitor.getCreatedDateTime());
-		assertEquals(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"), newVisitor.getModifiedDateTime());
+		assertEquals(java.sql.Timestamp.valueOf("2022-03-26 14:36:09.596"), newVisitor.getCreatedDateTime());
+		assertEquals(java.sql.Timestamp.valueOf("2022-03-26 14:36:09.596"), newVisitor.getModifiedDateTime());
 		assertEquals(LocalDate.of(2022,03,26), newVisitor.getArrivalDate());
 		assertEquals(LocalDate.of(2022,03,27), newVisitor.getDepartureDate());
 		assertEquals(401,newVisitor.getFlatNo());
@@ -78,8 +78,8 @@ public class VisitorTest {
 		assertEquals("Ateeq", newVisitor.getOwnerName());
 		assertEquals("Ateeq", newVisitor.getCreatedBy());
 		assertEquals("Ateeq", newVisitor.getModifiedBy());
-		assertEquals(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"), newVisitor.getCreatedDateTime());
-		assertEquals(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"), newVisitor.getModifiedDateTime());
+		assertEquals(java.sql.Timestamp.valueOf("2022-03-26 14:36:09.596"), newVisitor.getCreatedDateTime());
+		assertEquals(java.sql.Timestamp.valueOf("2022-03-26 14:36:09.596"), newVisitor.getModifiedDateTime());
 		assertEquals(LocalDate.of(2022,03,26), newVisitor.getArrivalDate());
 		assertEquals(LocalDate.of(2022,03,27), newVisitor.getDepartureDate());
 		assertEquals(401,newVisitor.getFlatNo());
