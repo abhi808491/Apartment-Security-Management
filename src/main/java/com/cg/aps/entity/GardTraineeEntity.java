@@ -40,7 +40,7 @@ public class GardTraineeEntity extends BaseEntity {
 	
 //Relationship between user and gardTrainee
 	@OneToOne(mappedBy="gard",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JsonIgnore
+
 	private UserEntity user;
 	
 	

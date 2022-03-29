@@ -1,5 +1,7 @@
 package com.cg.aps.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,11 +30,9 @@ public class FlatEntity extends BaseEntity {
 	private String floorNo;
 	private String flatType;
 	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.MERGE)
 	private List<DeliveryEntity> deliveries;
 	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.MERGE)
 	private List<DomesticHelpEntity> domesticHelp;
 
@@ -42,14 +42,9 @@ public class FlatEntity extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "rent_id")
 	FlatRentEntity flatrent;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_flatid")
-	UserEntity user;
-
-	
+		
 	@OneToOne(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JsonIgnore
+	
 	private UserEntity user;
 	
 	@Override
