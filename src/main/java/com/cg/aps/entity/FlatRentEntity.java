@@ -29,7 +29,6 @@ public class FlatRentEntity extends BaseEntity
 	
 	//relationship between flatRent and User
 	@OneToOne(mappedBy="flatrent",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JsonIgnore
 	private UserEntity user;
 	
 	@Override

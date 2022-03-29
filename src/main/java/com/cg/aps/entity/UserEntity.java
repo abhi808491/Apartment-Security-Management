@@ -39,28 +39,27 @@ public class UserEntity extends BaseEntity {
 	private String emailId;
 
 	private long roleId;
+	
 	//Relationship between User and Flat
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="flat_id")
+		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@JoinColumn(name="flat_id")
+		@JsonIgnore
 
-	private FlatEntity flat;
-	
-
-	@OneToOne(mappedBy="user")
-	FlatEntity flat;
-
-
-	
-	//Relationship between User and Flat rent
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="flatrent_id")
-	private FlatRentEntity flatrent;
-	
-   //Relationship between User and GardTrainee
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="gard_id")
-	
-	private GardTraineeEntity gard;
+		private FlatEntity flat;
+		
+		
+		//Relationship between User and Flat rent
+		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@JoinColumn(name="flatrent_id")
+		@JsonIgnore
+		private FlatRentEntity flatrent;
+		
+	   //Relationship between User and GardTrainee
+		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+		@JoinColumn(name="gard_id")
+		@JsonIgnore
+		
+		private GardTraineeEntity gard;
 	
 
 	@Override
