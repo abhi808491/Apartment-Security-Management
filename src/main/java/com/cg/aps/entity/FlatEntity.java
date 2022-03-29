@@ -1,7 +1,5 @@
 package com.cg.aps.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class FlatEntity extends BaseEntity {
 
 	private String ownerName;
@@ -50,15 +46,21 @@ public class FlatEntity extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_flatid")
 	UserEntity user;
+
 	
+	@OneToOne(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private UserEntity user;
 	
 	@Override
 	public String getKey() {
+		
 		return null;
 	}
 
 	@Override
 	public String getValue() {
+		
 		return null;
 	}
 }
