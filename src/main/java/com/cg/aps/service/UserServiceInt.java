@@ -21,7 +21,6 @@ public interface UserServiceInt {
 
 	public List<UserEntity> search(UserEntity bean);
 
-	public UserEntity authenticate(UserEntity bean);
 
 	public boolean changePassword(Long id, String oldPassword, String newPassword);
 
@@ -29,12 +28,9 @@ public interface UserServiceInt {
 
 	public boolean forgetPassword(String login);
 
-	public UserEntity getUserbyFlatId(long id);
-
-	public UserEntity getUserbyFlatRentId(long id);
-
-	public UserEntity getUserbyGardTraineeId(long id);
-	
 	public UserEntity addGard(long userPk,long gardPk);
 
+	public UserEntity addFlat(long userPk, long flatPk);
+	
+	public UserEntity addVehicle(long userPk, long vehiclePk);
 }
