@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.aps.dto.GardTraineeDto;
 import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.service.GardTraineeServiceInt;
 
@@ -24,17 +26,11 @@ public class GardTraineeController {
 
 	// search gard
 	@PostMapping("/searchgards")
-	public ResponseEntity<List<GardTraineeEntity>> search(@RequestBody GardTraineeEntity bean) {
-		List<GardTraineeEntity> al = gardsTranningServ.search(bean);
+	public ResponseEntity<List<GardTraineeEntity>> search(@RequestBody GardTraineeEntity gardTrainee) {
+		List<GardTraineeEntity> al = gardsTranningServ.search(gardTrainee);
 		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
 
-	// add gards
-	@PostMapping("/addgards")
-	public ResponseEntity<Long> add(@Valid @RequestBody GardTraineeEntity bean) {
-		Long id = gardsTranningServ.add(bean);
-		return new ResponseEntity<Long>(id, HttpStatus.OK);
-	}
 
 	// get gards by PK
 	@GetMapping("/getgards/id/{id}")
@@ -50,15 +46,15 @@ public class GardTraineeController {
 
 	// update gards
 	@PatchMapping("/updategards")
-	public void update(@Valid @RequestBody GardTraineeEntity bean) {
-		gardsTranningServ.update(bean);
+	public void update(@Valid @RequestBody GardTraineeEntity gardTrainee) {
+		gardsTranningServ.update(gardTrainee);
 
 	}
 
 	// delete gards
 	@DeleteMapping("/gards")
-	public void delete(@RequestBody GardTraineeEntity bean) {
-		gardsTranningServ.delete(bean);
+	public void delete(@RequestBody GardTraineeEntity gardTrainee) {
+		gardsTranningServ.delete(gardTrainee);
 	}
 
 	// get page
@@ -79,5 +75,23 @@ public class GardTraineeController {
 	public ResponseEntity<GardTraineeEntity> getGardBySalaryId(long id) {
 		return new ResponseEntity<GardTraineeEntity>(gardsTranningServ.getGardBySalaryId(id), HttpStatus.OK);
 	}
+	
+	@PostMapping("/addgards")
+	public ResponseEntity<Long> addGard(@RequestBody GardTraineeEntity gardTrainee)
+	{
+		return new ResponseEntity<Long>(gardsTranningServ.addGard(gardTrainee),HttpStatus.OK);
+	}
+		
+	@GetMapping("/mapsalary/{gardPk}/{salaryPk}")
+	public GardTraineeEntity  mapSalary(@PathVariable long gardPk,@PathVariable long salaryPk)
+	{
+		return gardsTranningServ.mapSalary(gardPk, salaryPk);
+	}
 
+	@GetMapping("/mapShift/{gardPk}/{shiftPk}")
+	public GardTraineeEntity  mapShift(@PathVariable long gardPk,@PathVariable long shiftPk)
+	{
+		return gardsTranningServ.mapShift(gardPk, shiftPk);
+	}
+	
 }

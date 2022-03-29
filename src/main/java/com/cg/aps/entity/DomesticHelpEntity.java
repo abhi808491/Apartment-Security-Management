@@ -1,15 +1,19 @@
 
 package com.cg.aps.entity;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +31,10 @@ public class DomesticHelpEntity extends BaseEntity{
 	private String arrivalTime;
 	private String departureTime;
 	private Date date;
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name = "flat_id", referencedColumnName = "id")
-	private FlatEntity flat;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "domesticHelpList",cascade = CascadeType.MERGE)
+	private List<FlatEntity> flat_domestic_help;
 
 	
 	@Override

@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -30,9 +31,8 @@ public class VehicleEntity extends BaseEntity {
 	private String vehicleNo;
 	private String vehicleType;
 	
-	@ManyToOne(cascade= CascadeType.MERGE,fetch=FetchType.LAZY)
-	@JoinColumn(name="flatId",referencedColumnName="id")
-	private FlatEntity flat;
+	@OneToOne(mappedBy="vehicleEntity",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private UserEntity userEntity;
 
 
 	@Override

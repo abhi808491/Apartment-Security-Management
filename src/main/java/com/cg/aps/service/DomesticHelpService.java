@@ -1,6 +1,7 @@
 package com.cg.aps.service;
 
 import com.cg.aps.entity.DomesticHelpEntity;
+import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.DomesticHelpDAOInt;
@@ -96,11 +97,6 @@ public class DomesticHelpService implements DomesticHelpServiceInt{
 		return d;
 	}
 
-	@Override
-	public List<DomesticHelpEntity> getDomesticHelpListByFlat(long id) {
-		// TODO Auto-generated method stub
-		return domesticHelpDAOInt.getDomesticHelpListByFlat(id);
-	}
 
 	
 	

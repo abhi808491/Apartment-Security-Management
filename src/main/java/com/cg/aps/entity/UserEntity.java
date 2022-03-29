@@ -48,18 +48,21 @@ public class UserEntity extends BaseEntity {
 		private FlatEntity flat;
 		
 		
-		//Relationship between User and Flat rent
-		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		@JoinColumn(name="flatrent_id")
-		@JsonIgnore
-		private FlatRentEntity flatrent;
-		
 	   //Relationship between User and GardTrainee
 		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 		@JoinColumn(name="gard_id")
 		@JsonIgnore
 		
 		private GardTraineeEntity gard;
+		
+		//  //Relationship between User and Vehicle
+		
+		@JsonIgnore
+		@OneToOne(cascade= CascadeType.MERGE,fetch=FetchType.LAZY)
+		@JoinColumn(name="vehicle_id",referencedColumnName="id")
+		private VehicleEntity vehicleEntity;
+		
+		
 	
 
 	@Override

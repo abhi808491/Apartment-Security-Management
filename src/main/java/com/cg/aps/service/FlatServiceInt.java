@@ -24,5 +24,7 @@ public interface FlatServiceInt
 	
 	public FlatEntity getFlatByUser(Long user_flatid);
 	
+	public List<FlatEntity> getFlatListByDomesticHelp(long id);
+	
 
 }

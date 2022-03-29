@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import com.cg.aps.entity.BaseEntity;
+import com.cg.aps.entity.UserEntity;
 import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
@@ -107,9 +108,9 @@ public class VehicleService implements VehicleServiceInt{
 	}
 
 	@Override
-	public List<VehicleEntity> getVehicleByFlatId(Long flatId) {
+	public VehicleEntity getVehicleOfUser(Long userId) {
 		// TODO Auto-generated method stub
-		return vehRepo.getVehicleOfFlat(flatId) ;
+		return vehRepo.getVehicleOfUser(userId);
 	}
 
 }

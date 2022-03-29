@@ -1,4 +1,4 @@
-package com.cg.aps.dto.request;
+package com.cg.aps.dto;
 
 public class RegisterUserRequest {
 	

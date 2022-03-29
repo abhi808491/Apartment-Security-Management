@@ -106,4 +106,11 @@ public class FlatService implements FlatServiceInt{
 		return flat;
 	}
 
+	@Override
+	public List<FlatEntity> getFlatListByDomesticHelp(long id) {
+		return flatDAOint.getFlatListByDomesticHelp(id);
+	}
+	
+	
+
 }

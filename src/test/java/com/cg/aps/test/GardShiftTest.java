@@ -23,25 +23,25 @@ public class GardShiftTest {
 
 	public GardShiftEntity addGardShift() {
 		GardShiftEntity gardShift = new GardShiftEntity();
-		gardShift.setId(14);
-		gardShift.setCreatedBy("Kailsah");
-		gardShift.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
-		gardShift.setUserId(23);
+		gardShift.setId(25);
+		gardShift.setCreatedBy("Abhishek Kumar");
+	    gardShift.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
+		gardShift.setUserId(35);
 		gardShift.setName("Navin");
 		gardShift.setTime("2PM");
-		gardShift.setDate(java.sql.Timestamp.valueOf("23-03-2022"));
+		gardShift.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Long id = gardShiftServ.add(gardShift);
 		return gardShiftServ.findByPk(id);
 
 	}
 
-	@Test
 	@Disabled
+	@Test
 	void addTest() {
 		GardShiftEntity newGard = addGardShift();
 		assertEquals("Navin", newGard.getName());
-		assertEquals(14, newGard.getId());
-		assertNotEquals(24, newGard.getUserId());
+		assertEquals(25, newGard.getId());
+		assertNotEquals(35, newGard.getUserId());
 
 	}
 
@@ -60,9 +60,8 @@ public class GardShiftTest {
 	}
 
 	@Test
-	@Disabled
 	void deleteTest() {
-		GardShiftEntity gardShift = gardShiftServ.findByPk(14);
+		GardShiftEntity gardShift = gardShiftServ.findByPk(25);
 		gardShiftServ.delete(gardShift);
 		assertThrows(RecordNotFoundException.class, () -> {
 			gardShiftServ.findByPk(gardShift.getId());
