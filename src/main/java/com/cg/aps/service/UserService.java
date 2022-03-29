@@ -14,6 +14,7 @@ import com.cg.aps.repository.UserDAOInt;
 
 import com.cg.aps.dto.request.RegisterUserRequest;
 import com.cg.aps.entity.UserEntity;
+import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 
@@ -22,13 +23,12 @@ public class UserService implements UserServiceInt{
 	
 	@Autowired
 	UserDAOInt userDao;
-	Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Override
 	public long add(UserEntity bean) {
 		Optional<UserEntity> user=userDao.findById(bean.getId());
 		if(user.isPresent())
 		{
-			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
+			throw new DuplicateRecordException("Record already exist there no duplicate allowed");
 		}
 		userDao.save(bean);
 		return bean.getId();
@@ -60,7 +60,7 @@ public class UserService implements UserServiceInt{
 		UserEntity user=userDao.findByLogin(login);
 		if(user==null)
 		{
-			throw new RecordNotFoundException("Record not found with given name found in the database = " +login);
+			throw new RecordNotFoundException("Record not found with given login found = " +login);
 		}
 		return userDao.findByLogin(login);
 	}
@@ -70,19 +70,25 @@ public class UserService implements UserServiceInt{
 		Optional<UserEntity> user=userDao.findById(id);
 		if(!user.isPresent())
 		{
-			throw new RecordNotFoundException("Record not found with given Id =" +id);
+			throw new RecordNotFoundException("Record not found with given ID =" +id);
 		}
 		return userDao.getById(id);
 	}
 
 	@Override
-	public List<UserEntity> search(UserEntity bean, long pageNo, int pageSize) {
+	public List<UserEntity> search(long pageNo, int pageSize) {
 		PageRequest paging = PageRequest.of((int)pageNo,(int) pageSize);
 		Page<UserEntity> pagedResult =userDao.findAll(paging);
-		return pagedResult.getContent();
+		if(pagedResult.hasContent())
+		{
+			return pagedResult.getContent();
+		}
+		else
+		{
+			throw new DatabaseException("Database not found");
+		}
+
 	}
-
-
 
 		@Override
 	public UserEntity authenticate(UserEntity bean) {
@@ -138,9 +144,6 @@ public class UserService implements UserServiceInt{
 				.password(request.getPassword()).build();
 
 		UserEntity user1=userDao.save(user);
-		System.out.println(user1.getId());
-		logger.info("Id {}",user1.getId());
-
 		return user1.getId();
 	}
 
@@ -152,6 +155,21 @@ public class UserService implements UserServiceInt{
 			throw new RecordNotFoundException("Record not found with given name found in the database = " +login);
 		}
 		return false;
+	}
+
+	@Override
+	public UserEntity getUserbyFlatId(long id) {
+		return userDao.getById(id);		
+	}
+
+	@Override
+	public UserEntity getUserbyFlatRentId(long id) {
+		return userDao.getById(id);
+	}
+
+	@Override
+	public UserEntity getUserbyGardTraineeId(long id) {
+		return userDao.getById(id);
 	}
 
 	}

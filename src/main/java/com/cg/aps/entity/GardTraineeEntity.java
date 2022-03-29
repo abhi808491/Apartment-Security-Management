@@ -15,9 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -40,7 +37,13 @@ public class GardTraineeEntity extends BaseEntity {
 	private String status;
 	private String timeing;
 	private Date date;
-
+	
+//Relationship between user and gardTrainee
+	@OneToOne(mappedBy="gard",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private UserEntity user;
+	
+	
 	// relationship between gardtraining and gardshift
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="shift_id")
@@ -52,11 +55,7 @@ public class GardTraineeEntity extends BaseEntity {
 	@JoinColumn(name="salary_id")
 	private GardSalaryEntity gardSalary;
 	
-	@OneToMany(mappedBy = "security_gard",cascade = CascadeType.MERGE)
-	@JsonIgnore
-	private List<SecurityEntity> securityEntity;
-	
-	
+
 	@Override
 	public String getKey() {
 		// TODO Auto-generated method stub
