@@ -18,10 +18,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class FlatRentEntity extends BaseEntity 
 {
-	private String name;
+	private String ownerName;
 	private String flatNo;
 	private String amount;
 	private String type;
+
+	@OneToOne(mappedBy="flatrent")
+	FlatEntity flat;
+
 	
 	//relationship between flatRent and User
 	@OneToOne(mappedBy="flatrent",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

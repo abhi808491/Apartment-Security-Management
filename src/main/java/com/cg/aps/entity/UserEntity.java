@@ -45,6 +45,11 @@ public class UserEntity extends BaseEntity {
 
 	private FlatEntity flat;
 	
+
+	@OneToOne(mappedBy="user")
+	FlatEntity flat;
+
+
 	
 	//Relationship between User and Flat rent
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -57,6 +62,7 @@ public class UserEntity extends BaseEntity {
 	
 	private GardTraineeEntity gard;
 	
+
 	@Override
 	public String getKey() {
 		// TODO Auto-generated method stub

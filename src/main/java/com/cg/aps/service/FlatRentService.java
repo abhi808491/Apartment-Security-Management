@@ -74,11 +74,11 @@ public class FlatRentService implements FlatRentServiceInt {
 
 	@Override
 	public FlatRentEntity findByName(String name) {
-		FlatRentEntity flat = flatrentDAOint.findByName(name);
+		FlatRentEntity flat = flatrentDAOint.findByOwnerName(name);
 		if (flat == null) {
 			throw new RecordNotFoundException("Record not found with given name found in the database = " + name);
 		}
-		return flatrentDAOint.findByName(name);
+		return flatrentDAOint.findByOwnerName(name);
 	}
 
 	@Override
