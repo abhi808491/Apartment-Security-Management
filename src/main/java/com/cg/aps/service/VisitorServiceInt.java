@@ -15,4 +15,5 @@ public interface VisitorServiceInt {
 	public List<VisitorEntity> search(Integer pageNo, Integer pageSize);
 	public List<VisitorEntity> search(VisitorEntity visitor) ;
 	public List<VisitorEntity> getVisitorByFlatId(long id);
+	public VisitorEntity addFlatRelationship(long visitorPk, long flatPk);
 }

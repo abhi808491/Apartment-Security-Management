@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +28,7 @@ public class VisitorEntity extends BaseEntity {
 	private LocalDate departureDate;
 	private String ownerName;
 	
-	
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "flatid", referencedColumnName = "id")
 	private FlatEntity visitor_flat;

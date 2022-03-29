@@ -21,4 +21,6 @@ public long add(SecurityEntity bean);
 	
 	public List<SecurityEntity> search(SecurityEntity bean);
 	public List<SecurityEntity> getSecurityByGard(long id);
+	
+	public SecurityEntity addRelation(long securityPk, long gardPk);
 }
