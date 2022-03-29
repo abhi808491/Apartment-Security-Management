@@ -85,18 +85,30 @@ public class UserController {
 	
 
 	@PostMapping("/user/{pageNo}/{pageSize}")
-	public ResponseEntity<List<UserEntity>> getDeliveries(@PathVariable Integer pageNo,@PathVariable Integer pageSize,@RequestBody UserEntity bean){
-		List<UserEntity> al= userServ.search(bean,pageNo,pageSize);
+	public ResponseEntity<List<UserEntity>> getDeliveries(@PathVariable Long pageNo,@PathVariable Integer pageSize){
+		List<UserEntity> al= userServ.search(pageNo,pageSize);
 		return new ResponseEntity<>(al,HttpStatus.OK);
 	}
+	
 	@PostMapping("/registerUser")
 	public ResponseEntity<String>registerUser(@RequestBody RegisterUserRequest request) {
 		userServ.registerUser(request);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+	@GetMapping("/getUserByFlat/{id}")
+	public ResponseEntity<UserEntity> getUserbyFlatId(long id) {
+		return new ResponseEntity<UserEntity>(userServ.getUserbyFlatId(id), HttpStatus.OK);
 	}
+	@GetMapping("/getUserByFlatRent/{id}")
+	public ResponseEntity<UserEntity> getUserbyFlatRentId(long id) {
+		return new ResponseEntity<UserEntity>(userServ.getUserbyFlatRentId(id), HttpStatus.OK);
+	}
+	@GetMapping("/getUserByGardTrainee/{id}")
+	public ResponseEntity<UserEntity> getUserbyGardTraineeId(long id) {
+		return new ResponseEntity<UserEntity>(userServ.getUserbyGardTraineeId(id), HttpStatus.OK);
+}
+}
 	
 	
 	

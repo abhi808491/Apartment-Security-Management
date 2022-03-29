@@ -2,11 +2,9 @@ package com.cg.aps.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.cg.aps.dto.request.RegisterUserRequest;
 import com.cg.aps.entity.UserEntity;
-import com.cg.aps.repository.UserDAOInt;
+
 
 
 
@@ -23,7 +21,7 @@ public interface UserServiceInt {
 		
 		public UserEntity findByPk(long id);
 		
-		public List<UserEntity> search(UserEntity bean, long pageNo, int pageSize);
+		public List<UserEntity> search(long pageNo, int pageSize);
 		
 		public List<UserEntity> search(UserEntity bean);
 		
@@ -36,6 +34,12 @@ public interface UserServiceInt {
 	    public long registerUser(RegisterUserRequest request);
 	    
 	    public boolean forgetPassword(String login);
+
+		public UserEntity getUserbyFlatId(long id);
+		
+		public UserEntity getUserbyFlatRentId(long id);
+
+		public UserEntity getUserbyGardTraineeId(long id);
 
 	
 		
