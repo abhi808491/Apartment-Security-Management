@@ -27,7 +27,7 @@ public class DeliveryEntity extends BaseEntity {
 	private String time;
 	private Date date;
 	private String status;
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "flat_id", referencedColumnName = "id")
 	private FlatEntity flat;

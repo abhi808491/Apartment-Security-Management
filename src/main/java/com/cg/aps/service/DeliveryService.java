@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.cg.aps.entity.DeliveryEntity;
+import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.DeliveryDAOInt;
+import com.cg.aps.repository.FlatDAOInt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,8 @@ import org.springframework.data.domain.PageRequest;
 public class DeliveryService implements DeliveryServiceInt{
 	@Autowired
 	DeliveryDAOInt deliveryDAOInt;
-	
+	@Autowired
+	FlatDAOInt flatDAOInt;
 	@Override
 	public long add(DeliveryEntity bean) {
 		Optional<DeliveryEntity> a=deliveryDAOInt.findById(bean.getId());
@@ -99,10 +101,28 @@ public class DeliveryService implements DeliveryServiceInt{
 	}
 
 	@Override
-	public List<DeliveryEntity> getDeliveriesByFlatId(long id) {
+	public List<DeliveryEntity> getDeliveryListByFlatId(long id) {
 		// TODO Auto-generated method stub
 		return deliveryDAOInt.getDeliveriesOfFlat(id);
+			
 	}
+	@Override
+	public  DeliveryEntity addFlat(long deliveryPk, long flatPk) {
+		// TODO Auto-generated method stub
+		DeliveryEntity delivery=deliveryDAOInt.getById(deliveryPk);
+		FlatEntity flat=flatDAOInt.getById(flatPk);
+		delivery.setFlat(flat);
+		deliveryDAOInt.save(delivery);
+		return delivery;
+		
+	}
+
+	@Override
+	public List<DeliveryEntity> getDeliveryListByGuardId(long id) {
+		// TODO Auto-generated method stub
+		return deliveryDAOInt.getDeliveryListOfGuard(id);
+	}
+
 
 	
 
