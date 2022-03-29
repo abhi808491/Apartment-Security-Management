@@ -2,6 +2,8 @@ package com.cg.aps.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class DeliveryController {
 
 	// add DeliveryEntity
 	@PostMapping("/addDelivery")
-	ResponseEntity<Long> add(@RequestBody DeliveryEntity deliveryEntity) {
+	ResponseEntity<Long> add(@Valid @RequestBody DeliveryEntity deliveryEntity) {
 		long delEnt = deliveryService.add(deliveryEntity);
 		return new ResponseEntity<>(delEnt, HttpStatus.OK);
 	}
@@ -44,7 +46,7 @@ public class DeliveryController {
 
 	// update deliverEntity
 	@PostMapping("/updateDelivery")
-	ResponseEntity<DeliveryEntity> update(@RequestBody DeliveryEntity deliveryEntity) {
+	ResponseEntity<DeliveryEntity> update(@Valid @RequestBody DeliveryEntity deliveryEntity) {
 		deliveryService.update(deliveryEntity);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -70,15 +72,28 @@ public class DeliveryController {
 		List<DeliveryEntity> delEnt = deliveryService.search(pageNo, pageSize);
 		return new ResponseEntity<>(delEnt, HttpStatus.OK);
 	}
-	//find deliveries of Flat
-	@GetMapping("deliveriesByFlat/{flatId}")
+	//find deliveryList By FlatId
+	@GetMapping("deliveryListByFlat/{flatId}")
 	ResponseEntity<List<DeliveryEntity>> getDeliveriesByFlatId(@PathVariable("flatId") Long flatId)
 	{
-		List<DeliveryEntity> delEnt=deliveryService.getDeliveriesByFlatId(flatId);
+		List<DeliveryEntity> delEnt=deliveryService.getDeliveryListByFlatId(flatId);
 		return new ResponseEntity<>(delEnt, HttpStatus.OK);
 		
 	}
-	
+	//find deliveryList By guardId
+	@GetMapping("deliveryListByGuard/{guardId}")
+	ResponseEntity<List<DeliveryEntity>> getDeliveriesByGuardId(@PathVariable("guardId") Long guardId)
+	{
+		List<DeliveryEntity> delEnt=deliveryService.getDeliveryListByGuardId(guardId);
+		return new ResponseEntity<>(delEnt, HttpStatus.OK);
+		
+	}
+	//add flat to delivery
+	@GetMapping("mapflattodelivery/{deliveryId}/{flatId}")
+	ResponseEntity<DeliveryEntity> mapDeliveytoFlat(@PathVariable("deliveryId") Long deliveryId,@PathVariable("flatId") Long flatId)
+	{
+		return new ResponseEntity<>(deliveryService.addFlat(deliveryId, flatId),HttpStatus.OK);
+	}
 	
 	
 }

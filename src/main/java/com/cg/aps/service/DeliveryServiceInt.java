@@ -17,6 +17,10 @@ public long add(DeliveryEntity bean);
 	
 	public List<DeliveryEntity> search(DeliveryEntity bean);
 
-	List<DeliveryEntity> getDeliveriesByFlatId(long id);
+	List<DeliveryEntity> getDeliveryListByFlatId(long id);
+	
+	List<DeliveryEntity> getDeliveryListByGuardId(long id);
+	
+	DeliveryEntity addFlat(long deliveryPk,long flatPk);
 
 }
