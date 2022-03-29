@@ -28,7 +28,7 @@ public class UserController {
 	UserServiceInt userServ;
 
 	// searching Users
-	@PostMapping("/searchusers")
+	@PostMapping("/searchUsers")
 	public ResponseEntity<List<UserEntity>> search(@RequestBody UserEntity bean) {
 		List<UserEntity> al = userServ.search(bean);
 		return new ResponseEntity<>(al, HttpStatus.OK);
@@ -67,15 +67,6 @@ public class UserController {
 		userServ.delete(bean);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-	// authentication
-	@GetMapping("/login")
-	public ResponseEntity<UserEntity> authenticate(@RequestBody UserEntity bean) {
-
-		userServ.authenticate(bean);
-		return new ResponseEntity<>(HttpStatus.OK);
-
-	}
 	// update password
 
 	@PutMapping("/updatePassword")
@@ -84,38 +75,39 @@ public class UserController {
 		userServ.changePassword(request.getId(), request.getOldPassword(), request.getNewPassword());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+	
+   //pagination
+	
 	@PostMapping("/user/{pageNo}/{pageSize}")
 	public ResponseEntity<List<UserEntity>> getDeliveries(@PathVariable Long pageNo, @PathVariable Integer pageSize) {
 		List<UserEntity> al = userServ.search(pageNo, pageSize);
 		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
 
-	@PostMapping("/registerUser")
+	// Register user
+	@PostMapping("/loginAdmin")
 	public ResponseEntity<String> registerUser(@RequestBody RegisterUserRequest request) {
 		userServ.registerUser(request);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-	@GetMapping("/getUserByFlat/{id}")
-	public ResponseEntity<UserEntity> getUserbyFlatId(long id) {
-		return new ResponseEntity<UserEntity>(userServ.getUserbyFlatId(id), HttpStatus.OK);
-	}
-
-	@GetMapping("/getUserByFlatRent/{id}")
-	public ResponseEntity<UserEntity> getUserbyFlatRentId(long id) {
-		return new ResponseEntity<UserEntity>(userServ.getUserbyFlatRentId(id), HttpStatus.OK);
-	}
-
-	@GetMapping("/getUserByGardTrainee/{id}")
-	public ResponseEntity<UserEntity> getUserbyGardTraineeId(long id) {
-		return new ResponseEntity<UserEntity>(userServ.getUserbyGardTraineeId(id), HttpStatus.OK);
-	}
 	
-	@GetMapping("/addGard/{userPk}/{loginPk}")
-	public UserEntity addGard(@PathVariable("userPk") long userPk,@PathVariable("loginPk") long gardPk) {
+	//AddGard with userPk(Relationship)
+	@GetMapping("/addGard/{userPk}/{gardPk}")
+	public UserEntity addGard(@PathVariable("userPk") long userPk,@PathVariable("gardPk") long gardPk) {
 		return userServ.addGard(userPk, gardPk);
 	}
+	//AddFlat with userPk(Relationship)
+	@GetMapping("/addFlat/{userPk}/{flatPk}")
+	public UserEntity addFlat(@PathVariable("userPk") long userPk,@PathVariable("flatPk") long flatPk) {
+		return userServ.addFlat(userPk, flatPk);
+	}
+	//AddVehicle with userPk(Relationship)
+	@GetMapping("/addVehicle/{userPk}/{vehiclePk}")
+	public UserEntity addVehicle(@PathVariable("userPk") long userPk,@PathVariable("vehiclePk") long vehiclePk) {
+		return userServ.addVehicle(userPk, vehiclePk);
+	}
+
+
 }
 	

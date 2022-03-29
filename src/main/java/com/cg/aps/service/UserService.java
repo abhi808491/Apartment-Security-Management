@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.cg.aps.repository.FlatDAOInt;
 import com.cg.aps.repository.GardTraineeDAOInt;
 import com.cg.aps.repository.UserDAOInt;
+import com.cg.aps.repository.VehicleRepository;
 import com.cg.aps.dto.RegisterUserRequest;
+import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.UserEntity;
+import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
@@ -28,6 +30,14 @@ public class UserService implements UserServiceInt{
 	
 	@Autowired
 	GardTraineeDAOInt gardTraineeDAOInt;
+	
+	@Autowired
+	VehicleRepository vehRepo;
+	
+	@Autowired
+	 FlatDAOInt flatDAOint;
+	
+	
 	@Override
 	public long add(UserEntity bean) {
 		Optional<UserEntity> user=userDao.findById(bean.getId());
@@ -95,18 +105,7 @@ public class UserService implements UserServiceInt{
 
 	}
 
-		@Override
-	public UserEntity authenticate(UserEntity bean) {
-			Optional<UserEntity> user = userDao.findById(bean.getId());
-			if(user.isPresent()) {
-				UserEntity temp = user.get();
-				if(temp.getPassword()==bean.getPassword()) {
-					return temp;
-				}
-			}
-			return (UserEntity) userDao.getById(bean.getId());
-		
-	}
+
 	
 	@Override
 	public List<UserEntity> search(UserEntity bean) {
@@ -163,30 +162,30 @@ public class UserService implements UserServiceInt{
 	}
 
 	@Override
-	public UserEntity getUserbyFlatId(long id) {
-		return userDao.getById(id);		
-	}
-
-	@Override
-	public UserEntity getUserbyFlatRentId(long id) {
-		return userDao.getById(id);
-	}
-
-	@Override
-	public UserEntity getUserbyGardTraineeId(long id) {
-		return userDao.getById(id);
-	}
-
-	@Override
 	public UserEntity addGard(long userPk, long gardPk) {
 		UserEntity user=userDao.getById(userPk);
 		GardTraineeEntity traniee=gardTraineeDAOInt.getById(gardPk);
 		user.setGard(traniee);
 		userDao.save(user);
 		return user;
-		
-		
+	
 	}
+	@Override
+	public UserEntity addFlat(long userPk, long flatPk) {
+		UserEntity user=userDao.getById(userPk);
+		FlatEntity flat=flatDAOint.getById(flatPk);
+		 user.setFlat(flat);
+		 userDao.save(user);
+		return user;
+	}
+	
+	public UserEntity addVehicle(long userPk, long vehiclePk) {
+		UserEntity user=userDao.getById(userPk);
+		VehicleEntity vehicle=vehRepo.getById(vehiclePk);
+		 user.setVehicleEntity(vehicle);
+		 userDao.save(user);
+		 return user;
+}
 
 	}
 
