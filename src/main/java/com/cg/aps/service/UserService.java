@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import com.cg.aps.repository.UserDAOInt;
 
-import com.cg.aps.dto.request.RegisterUserRequest;
+import com.cg.aps.repository.GardTraineeDAOInt;
+import com.cg.aps.repository.UserDAOInt;
+import com.cg.aps.dto.RegisterUserRequest;
+import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.UserEntity;
 import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
@@ -23,6 +25,9 @@ public class UserService implements UserServiceInt{
 	
 	@Autowired
 	UserDAOInt userDao;
+	
+	@Autowired
+	GardTraineeDAOInt gardTraineeDAOInt;
 	@Override
 	public long add(UserEntity bean) {
 		Optional<UserEntity> user=userDao.findById(bean.getId());
@@ -170,6 +175,17 @@ public class UserService implements UserServiceInt{
 	@Override
 	public UserEntity getUserbyGardTraineeId(long id) {
 		return userDao.getById(id);
+	}
+
+	@Override
+	public UserEntity addGard(long userPk, long gardPk) {
+		UserEntity user=userDao.getById(userPk);
+		GardTraineeEntity traniee=gardTraineeDAOInt.getById(gardPk);
+		user.setGard(traniee);
+		userDao.save(user);
+		return user;
+		
+		
 	}
 
 	}

@@ -22,7 +22,7 @@ public interface VehicleServiceInt {
 	
 	public List<VehicleEntity> search(VehicleEntity bean);
 
-	public List<VehicleEntity> getVehicleByFlatId(Long flatId);
+	public VehicleEntity getVehicleOfUser(Long userId);
 	
 	}
 

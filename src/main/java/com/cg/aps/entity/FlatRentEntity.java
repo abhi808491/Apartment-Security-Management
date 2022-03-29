@@ -25,11 +25,6 @@ public class FlatRentEntity extends BaseEntity
 
 	@OneToOne(mappedBy="flatrent")
 	FlatEntity flat;
-
-	
-	//relationship between flatRent and User
-	@OneToOne(mappedBy="flatrent",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private UserEntity user;
 	
 	@Override
 	public String getKey() {

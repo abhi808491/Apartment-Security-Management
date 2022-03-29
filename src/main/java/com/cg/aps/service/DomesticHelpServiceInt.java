@@ -3,6 +3,7 @@ package com.cg.aps.service;
 import java.util.List;
 
 import com.cg.aps.entity.DomesticHelpEntity;
+import com.cg.aps.entity.FlatEntity;
 
 public interface DomesticHelpServiceInt {
 
@@ -20,7 +21,6 @@ public interface DomesticHelpServiceInt {
 	
 	public List<DomesticHelpEntity> search(DomesticHelpEntity bean);
 
-	List<DomesticHelpEntity> getDomesticHelpListByFlat(long id);
 
 
 	

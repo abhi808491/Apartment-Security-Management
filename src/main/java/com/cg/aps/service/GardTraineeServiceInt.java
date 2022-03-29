@@ -2,14 +2,14 @@ package com.cg.aps.service;
 
 import java.util.List;
 
+import com.cg.aps.dto.GardTraineeDto;
 import com.cg.aps.entity.GardTraineeEntity;
 
 public interface GardTraineeServiceInt {
-	public long add(GardTraineeEntity bean);
 
-	public void update(GardTraineeEntity bean);
+	public void update(GardTraineeEntity gardTrainee);
 
-	public void delete(GardTraineeEntity bean);
+	public void delete(GardTraineeEntity gardTrainee);
 
 	public GardTraineeEntity getByName(String name);
 
@@ -17,10 +17,16 @@ public interface GardTraineeServiceInt {
 
 	public List<GardTraineeEntity> search( long pageNo, int pageSize);
 
-	public List<GardTraineeEntity> search(GardTraineeEntity bean);
+	public List<GardTraineeEntity> search(GardTraineeEntity gardTrainee);
 
 	public List<GardTraineeEntity> getAllGardTraineeByShiftId(long id);
 
-	GardTraineeEntity getGardBySalaryId(long id);
+	public GardTraineeEntity getGardBySalaryId(long id);
+	
+	public long addGard(GardTraineeEntity gardTrainee);
+	
+	public GardTraineeEntity  mapShift(long gardPk,long shiftPk);
+	
+	public GardTraineeEntity  mapSalary(long gardPk,long salaryPk);
 
 }

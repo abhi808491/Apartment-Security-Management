@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.service.FlatServiceInt;
 
@@ -80,5 +81,13 @@ public class FlatController {
 		@GetMapping("/getflatsbyUserId/{id}")
 		public ResponseEntity<FlatEntity> getFlatByUser(@PathVariable("id") long id) {
 			return new ResponseEntity<FlatEntity>(flatServ.getFlatByUser(id), HttpStatus.OK);
+		}
+		//find domesticHelps by flat
+		@GetMapping("FlatBydomesticHelps/{domestic_help_id}")
+		ResponseEntity<List<FlatEntity>> getByFlatId(@PathVariable("domestic_help_id") Long domesticHelpId)
+		{
+			List<FlatEntity> flat=flatServ.getFlatListByDomesticHelp(domesticHelpId);
+			return new ResponseEntity<>(flat, HttpStatus.OK);
+			
 		}
 }

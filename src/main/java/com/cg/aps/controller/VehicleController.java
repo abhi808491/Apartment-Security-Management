@@ -69,10 +69,10 @@ return new ResponseEntity<>( HttpStatus.OK);
 	}
 	
 
-	@GetMapping("VehicleByFlat/{flatId}")
-	ResponseEntity<List<VehicleEntity>> getVehicleByFlatId(@PathVariable("flatId") Long flatId)
+	@GetMapping("VehicleByUser/{userId}")
+	ResponseEntity<VehicleEntity> getVehicleByFlatId(@PathVariable("userId") Long userId)
 	{
-		List<VehicleEntity> vehEnt=vehServ.getVehicleByFlatId(flatId);
+		VehicleEntity vehEnt=vehServ.getVehicleOfUser(userId);
 		return new ResponseEntity<>(vehEnt,HttpStatus.OK);
 	}
 	

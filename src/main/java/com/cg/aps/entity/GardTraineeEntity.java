@@ -40,19 +40,21 @@ public class GardTraineeEntity extends BaseEntity {
 	
 //Relationship between user and gardTrainee
 	@OneToOne(mappedBy="gard",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-
+	@JsonIgnore
 	private UserEntity user;
 	
 	
 	// relationship between gardtraining and gardshift
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="shift_id")
+	@JsonIgnore
 	private GardShiftEntity gardShift;
 	
 	
 	// relationship between gardtraining and gardsalary
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="salary_id")
+	@JsonIgnore
 	private GardSalaryEntity gardSalary;
 	
 

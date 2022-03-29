@@ -69,13 +69,6 @@ public class DomesticHelpController {
 		List<DomesticHelpEntity> domEnt = domesticHelpService.search(pageNo, pageSize);
 		return new ResponseEntity<>(domEnt, HttpStatus.OK);
 	}
-	//find domesticHelps by flat
-	@GetMapping("domesticHelpsByFlat/{flatId}")
-	ResponseEntity<List<DomesticHelpEntity>> getByFlatId(@PathVariable("flatId") Long flatId)
-	{
-		List<DomesticHelpEntity> domEnt=domesticHelpService.getDomesticHelpListByFlat(flatId);
-		return new ResponseEntity<>(domEnt, HttpStatus.OK);
-		
-	}
+	
 
 }

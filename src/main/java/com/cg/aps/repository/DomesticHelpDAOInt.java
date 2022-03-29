@@ -11,7 +11,6 @@ import com.cg.aps.entity.DomesticHelpEntity;
 public interface DomesticHelpDAOInt extends JpaRepository<DomesticHelpEntity, Long>{
 	public List<DomesticHelpEntity> findByOwnerName(String name);
 
-	@Query(value = "select * from domestic_help_entity inner join flat_entity on domestic_help_Entity.flat_id=flat_entity.id where flat_entity.id=:flatId", nativeQuery = true)
-	public List<DomesticHelpEntity> getDomesticHelpListByFlat(@Param("flatId") Long flat_id);
+	
 	
 }
