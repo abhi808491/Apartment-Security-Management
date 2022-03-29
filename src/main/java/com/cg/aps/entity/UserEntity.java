@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 
 
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -36,7 +37,8 @@ public class UserEntity extends BaseEntity {
 
 	private long roleId;
 	
-	
+	@OneToOne(mappedBy="user")
+	FlatEntity flat;
 
 	@Override
 	public String getKey() {

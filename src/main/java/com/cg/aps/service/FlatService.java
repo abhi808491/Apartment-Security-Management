@@ -24,10 +24,10 @@ public class FlatService implements FlatServiceInt{
 	public long add(FlatEntity bean) {
 		Optional<FlatEntity> flat =flatDAOint.findById(bean.getId());
 		if (flat.isPresent()) {
-			throw new DuplicateRecordException("Record already exists. No duplicate allowed");
+			throw new DuplicateRecordException("Record already exists. No duplicate allowed : "+bean.getId());
 		}
-		flatDAOint.save(bean);
-		return bean.getId();
+		FlatEntity f = flatDAOint.save(bean);
+		return f.getId();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class FlatService implements FlatServiceInt{
 		if (!flat.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		flatDAOint.delete(bean);
+		flatDAOint.delete(flat.get());
 
 	}
 
@@ -55,7 +55,7 @@ public class FlatService implements FlatServiceInt{
 		if (!flat.isPresent()) {
 			throw new RecordNotFoundException("Record with the given ID is not found =" + id);
 		}
-		return flatDAOint.getById(id);
+		return flat.get();
 
 	}
 
@@ -66,18 +66,18 @@ public class FlatService implements FlatServiceInt{
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
 		FlatEntity newFlat = flatDAOint.getById(bean.getId());
-		List<FlatEntity> al = new ArrayList();
+		List<FlatEntity> al = new ArrayList<>();
 		al.add(newFlat);
 		return al;
 	}
 
 	@Override
-	public FlatEntity findByName(String name) {
-		FlatEntity flat = flatDAOint.findByName(name);
+	public FlatEntity findByOwnerName(String name) {
+		FlatEntity flat = flatDAOint.findByOwnerName(name);
 		if (flat == null) {
 			throw new RecordNotFoundException("Record not found with given name found in the database = " + name);
 		}
-		return flatDAOint.findByName(name);
+		return flat;
 	}
 
 	@Override
@@ -86,6 +86,24 @@ public class FlatService implements FlatServiceInt{
 		Page<FlatEntity> pagedResult =flatDAOint.findAll(paging);
 		return pagedResult.getContent();
 		
+	}
+
+	@Override
+	public FlatEntity getFlatByRent(Long rentId) {
+		FlatEntity flat = flatDAOint.getFlatByRent(rentId);
+		if (flat == null) {
+			throw new RecordNotFoundException("Record not found with given name found in the database = " + rentId);
+		}
+		return flat;
+	}
+
+	@Override
+	public FlatEntity getFlatByUser(Long user_flatid) {
+		FlatEntity flat = flatDAOint.getFlatByUser(user_flatid);
+		if (flat == null) {
+			throw new RecordNotFoundException("Record not found with given name found in the database = " + user_flatid);
+		}
+		return flat;
 	}
 
 }

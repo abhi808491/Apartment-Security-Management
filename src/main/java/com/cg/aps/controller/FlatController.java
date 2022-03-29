@@ -45,8 +45,8 @@ public class FlatController {
 
 		// get flats by name
 		@GetMapping("/getflats/name/{name}")
-		public ResponseEntity<FlatEntity> getByName(@Valid @PathVariable("name") String name) {
-			return new ResponseEntity<FlatEntity>(flatServ.findByName(name), HttpStatus.OK);
+		public ResponseEntity<FlatEntity> getByOwnerName(@Valid @PathVariable("name") String name) {
+			return new ResponseEntity<FlatEntity>(flatServ.findByOwnerName(name), HttpStatus.OK);
 		}
 
 		// update flats
@@ -68,5 +68,17 @@ public class FlatController {
 		public ResponseEntity<List<FlatEntity>> getDeliveries(@PathVariable Integer pageNo,@PathVariable Integer pageSize,@RequestBody FlatEntity bean){
 			List<FlatEntity> al= flatServ.search(bean,pageNo,pageSize);
 			return new ResponseEntity<>(al,HttpStatus.OK);
+		}
+		
+		// get flat by rent ID
+		@GetMapping("/getflatsbyRentId/{id}")
+		public ResponseEntity<FlatEntity> getFlatByRent(@PathVariable("id") long id) {
+			return new ResponseEntity<FlatEntity>(flatServ.getFlatByRent(id), HttpStatus.OK);
+		}
+		
+		// get flat by user ID
+		@GetMapping("/getflatsbyUserId/{id}")
+		public ResponseEntity<FlatEntity> getFlatByUser(@PathVariable("id") long id) {
+			return new ResponseEntity<FlatEntity>(flatServ.getFlatByUser(id), HttpStatus.OK);
 		}
 }
