@@ -22,9 +22,10 @@ public class GardSalaryService implements GardSalaryServiceInt {
 	@Autowired
 	GardSalaryDAOInt gardSalaryDAOInt;
 
+	// method to add salary
 	@Override
 	public long add(GardSalaryEntity bean) {
-		Optional<GardSalaryEntity> gard =gardSalaryDAOInt.findById(bean.getId());
+		Optional<GardSalaryEntity> gard = gardSalaryDAOInt.findById(bean.getId());
 		if (gard.isPresent()) {
 			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
 		}
@@ -32,6 +33,7 @@ public class GardSalaryService implements GardSalaryServiceInt {
 		return bean.getId();
 	}
 
+	// method to update salary
 	@Override
 	public void update(GardSalaryEntity bean) {
 		Optional<GardSalaryEntity> gard = gardSalaryDAOInt.findById(bean.getId());
@@ -42,6 +44,7 @@ public class GardSalaryService implements GardSalaryServiceInt {
 
 	}
 
+	// method to delete salary
 	@Override
 	public void delete(GardSalaryEntity bean) {
 		Optional<GardSalaryEntity> gard = gardSalaryDAOInt.findById(bean.getId());
@@ -52,6 +55,7 @@ public class GardSalaryService implements GardSalaryServiceInt {
 
 	}
 
+	// method to find by name
 	@Override
 	public GardSalaryEntity findByName(String name) {
 		GardSalaryEntity gard = gardSalaryDAOInt.findByName(name);
@@ -61,6 +65,7 @@ public class GardSalaryService implements GardSalaryServiceInt {
 		return gardSalaryDAOInt.findByName(name);
 	}
 
+	// method to find by primary key
 	@Override
 	public GardSalaryEntity findByPk(long id) {
 		Optional<GardSalaryEntity> gard = gardSalaryDAOInt.findById(id);
@@ -70,27 +75,26 @@ public class GardSalaryService implements GardSalaryServiceInt {
 		return gardSalaryDAOInt.getById(id);
 	}
 
+	// method to get paging
 	@Override
 	public List<GardSalaryEntity> search(long pageNo, int pageSize) {
-		PageRequest paging = PageRequest.of((int) pageNo,pageSize);
-		Page<GardSalaryEntity> pagedResult =gardSalaryDAOInt.findAll(paging);
-		if(pagedResult.hasContent())
-		{
+		PageRequest paging = PageRequest.of((int) pageNo, pageSize);
+		Page<GardSalaryEntity> pagedResult = gardSalaryDAOInt.findAll(paging);
+		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
-		}
-		else
-		{
+		} else {
 			throw new DatabaseException("DataBase not found");
 		}
 	}
 
+	// method to search salary using object
 	@Override
 	public List<GardSalaryEntity> search(GardSalaryEntity bean) {
 		Optional<GardSalaryEntity> gard = gardSalaryDAOInt.findById(bean.getId());
 		if (!gard.isPresent()) {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
-		GardSalaryEntity newGard =gardSalaryDAOInt.getById(bean.getId());
+		GardSalaryEntity newGard = gardSalaryDAOInt.getById(bean.getId());
 		List<GardSalaryEntity> al = new ArrayList();
 		al.add(newGard);
 		return al;

@@ -17,7 +17,7 @@ public interface GardShiftServiceInt {
 
 	public GardShiftEntity findByPk(long id);
 
-	public List<GardShiftEntity> search( long pageNo, int pageSize);
+	public List<GardShiftEntity> search(long pageNo, int pageSize);
 
 	public List<GardShiftEntity> search(GardShiftEntity bean);
 

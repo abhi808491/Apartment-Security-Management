@@ -18,7 +18,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Entity
 @Builder
@@ -27,43 +26,30 @@ import lombok.NoArgsConstructor;
 public class UserEntity extends BaseEntity {
 
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private String loginId;
-	
+
 	private String password;
-	
+
 	private String mobileNo;
-	
+
 	private String emailId;
 
 	private long roleId;
-	
-	//Relationship between User and Flat
-		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		@JoinColumn(name="flat_id")
-		@JsonIgnore
 
-		private FlatEntity flat;
-		
-		
-	   //Relationship between User and GardTrainee
-		@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-		@JoinColumn(name="gard_id")
-		@JsonIgnore
-		
-		private GardTraineeEntity gard;
-		
-		//  //Relationship between User and Vehicle
-		
-		@JsonIgnore
-		@OneToOne(cascade= CascadeType.MERGE,fetch=FetchType.LAZY)
-		@JoinColumn(name="vehicle_id",referencedColumnName="id")
-		private VehicleEntity vehicleEntity;
-		
-		
-	
+	// Relationship between User and Flat
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "flat_id")
+	@JsonIgnore
+	private FlatEntity flat;
+
+	// Relationship between User and GardTrainee
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "gard_id")
+	@JsonIgnore
+	private GardTraineeEntity gard;
 
 	@Override
 	public String getKey() {
@@ -74,8 +60,6 @@ public class UserEntity extends BaseEntity {
 	@Override
 	public String getValue() {
 		// TODO Auto-generated method stub
-		return firstName+" "+lastName;
+		return firstName + " " + lastName;
 	}
-	}
-
-
+}

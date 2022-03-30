@@ -27,6 +27,8 @@ public class GardSalaryEntity extends BaseEntity {
 	@NotBlank(message = "Status should not be empty")
 	private String status;
 	private Date date;
+	
+	//relationship between gard and gardSalary
 	@OneToOne(mappedBy="gardSalary",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private GardTraineeEntity gardsTranning;

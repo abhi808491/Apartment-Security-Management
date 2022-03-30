@@ -15,18 +15,18 @@ public interface GardTraineeServiceInt {
 
 	public GardTraineeEntity findByPk(long id);
 
-	public List<GardTraineeEntity> search( long pageNo, int pageSize);
+	public List<GardTraineeEntity> search(long pageNo, int pageSize);
 
 	public List<GardTraineeEntity> search(GardTraineeEntity gardTrainee);
 
 	public List<GardTraineeEntity> getAllGardTraineeByShiftId(long id);
 
 	public GardTraineeEntity getGardBySalaryId(long id);
-	
+
 	public long addGard(GardTraineeEntity gardTrainee);
-	
-	public GardTraineeEntity  mapShift(long gardPk,long shiftPk);
-	
-	public GardTraineeEntity  mapSalary(long gardPk,long salaryPk);
+
+	public GardTraineeEntity mapShift(long gardPk, long shiftPk);
+
+	public GardTraineeEntity mapSalary(long gardPk, long salaryPk);
 
 }

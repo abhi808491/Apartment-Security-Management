@@ -32,16 +32,18 @@ public class GardTraineeService implements GardTraineeServiceInt {
 	@Autowired
 	GardSalaryDAOInt gardSalaryDAOInt;
 
+	//method to add gard
 	@Override
 	public long addGard(GardTraineeEntity gardTrainee) {
 		Optional<GardTraineeEntity> gard = gardsTraineeDAOInt.findById(gardTrainee.getId());
 		if (gard.isPresent()) {
 			throw new DuplicateRecordException("Record is already exist there no duplicate allowed");
 		}
-				GardTraineeEntity newgard=	gardsTraineeDAOInt.save(gardTrainee);
-				return newgard.getId();
+		GardTraineeEntity newgard = gardsTraineeDAOInt.save(gardTrainee);
+		return newgard.getId();
 	}
 
+	//method to update gard
 	@Override
 	public void update(GardTraineeEntity gardTrainee) {
 
@@ -53,6 +55,7 @@ public class GardTraineeService implements GardTraineeServiceInt {
 		gardsTraineeDAOInt.save(gardTrainee);
 	}
 
+	//method to delete gard
 	@Override
 	public void delete(GardTraineeEntity gardTrainee) {
 		Optional<GardTraineeEntity> gard = gardsTraineeDAOInt.findById(gardTrainee.getId());
@@ -64,6 +67,7 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	}
 
+	//method to get gard by primary key
 	@Override
 	public GardTraineeEntity findByPk(long id) {
 		Optional<GardTraineeEntity> gardop = gardsTraineeDAOInt.findById(id);
@@ -75,6 +79,7 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	}
 
+	//method to serach gard using gard object
 	@Override
 	public List<GardTraineeEntity> search(GardTraineeEntity gardTrainee) {
 		Optional<GardTraineeEntity> gardop = gardsTraineeDAOInt.findById(gardTrainee.getId());
@@ -86,7 +91,9 @@ public class GardTraineeService implements GardTraineeServiceInt {
 		al.add(newGard);
 		return al;
 	}
-
+	
+	
+	//method to get gard by name
 	@Override
 	public GardTraineeEntity getByName(String name) {
 		GardTraineeEntity gard = gardsTraineeDAOInt.findByName(name);
@@ -108,16 +115,19 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	}
 
+	//method to get gard using shift id with the help of realtionship
 	public List<GardTraineeEntity> getAllGardTraineeByShiftId(long id) {
 		return gardsTraineeDAOInt.getAllGardTraineeByShiftId(id);
 
 	}
 
+	//method to get gard using salary id with the help of realtionship
 	@Override
 	public GardTraineeEntity getGardBySalaryId(long id) {
 		return gardsTraineeDAOInt.getGardBySalaryId(id);
 	}
 
+	//method to map shift to the gard
 	@Override
 	public GardTraineeEntity mapShift(long gardPk, long shiftPk) {
 		GardTraineeEntity gard = gardsTraineeDAOInt.getById(gardPk);
@@ -127,6 +137,7 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	}
 
+	//method to add salary details to gard
 	public GardTraineeEntity mapSalary(long gardPk, long salaryPk) {
 		GardTraineeEntity gard = gardsTraineeDAOInt.getById(gardPk);
 		GardSalaryEntity salary = gardSalaryDAOInt.getById(salaryPk);

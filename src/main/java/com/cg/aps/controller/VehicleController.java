@@ -68,12 +68,16 @@ return new ResponseEntity<>( HttpStatus.OK);
 	return new ResponseEntity<>(domEnt, HttpStatus.OK);
 	}
 	
-
-	@GetMapping("VehicleByUser/{userId}")
-	ResponseEntity<VehicleEntity> getVehicleByFlatId(@PathVariable("userId") Long userId)
+	@GetMapping("VehicleByFlat/{flatId}")
+	ResponseEntity<List<VehicleEntity>> getVehicleByFlatId(@PathVariable("flatId") Long flatId)
 	{
-		VehicleEntity vehEnt=vehServ.getVehicleOfUser(userId);
+		List<VehicleEntity> vehEnt=vehServ.getVehicleByFlatId(flatId);
 		return new ResponseEntity<>(vehEnt,HttpStatus.OK);
+	}
+	
+	@GetMapping("/addVehicle/{vehiclePk}/{flatPk}")
+	public VehicleEntity addVehicle(@PathVariable("vehiclePk") long vehiclePk,@PathVariable("flatPk") long flatPk) {
+		return vehServ.addVehicle(vehiclePk,flatPk );
 	}
 	
 }

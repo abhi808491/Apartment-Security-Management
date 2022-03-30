@@ -32,7 +32,7 @@ public class DomesticHelpEntity extends BaseEntity{
 	private String departureTime;
 	private Date date;
 	
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "domesticHelpList",cascade = CascadeType.MERGE)
 	private List<FlatEntity> flat_domestic_help;
 

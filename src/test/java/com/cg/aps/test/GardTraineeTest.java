@@ -23,17 +23,17 @@ public class GardTraineeTest {
 
 	@Autowired
 	GardTraineeServiceInt gardsTranningServ;
-	
+
 	public GardTraineeEntity addGardShift() {
 		GardTraineeEntity gard = new GardTraineeEntity();
 		gard.setId(79);
 		gard.setCreatedBy("Ranjan");
-	    gard.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
+		gard.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		gard.setUserId(18);
 		gard.setName("Navin");
 		gard.setMobileNo("7004657498");
 		gard.setStatus("underTraining");
-		
+
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Long id = gardsTranningServ.addGard(gard);
 		return gardsTranningServ.findByPk(id);
@@ -44,15 +44,15 @@ public class GardTraineeTest {
 	void add() {
 		GardTraineeEntity gard = addGardShift();
 		assertEquals("Ranjan", gard.getCreatedBy());
-		//assertEquals("9AM", gard.getTimeing());
+		// assertEquals("9AM", gard.getTimeing());
 		assertEquals(79, gard.getId());
-	
+
 	}
 
 	@Disabled
 	@Test
 	void update() {
-		GardTraineeEntity  gard = gardsTranningServ.findByPk(5);
+		GardTraineeEntity gard = gardsTranningServ.findByPk(5);
 		gard.setName("Muskan");
 		gard.setModifiedBy("Abhishek");
 		gard.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
@@ -62,10 +62,11 @@ public class GardTraineeTest {
 		assertEquals("Muskan", updatedGard.getName());
 		assertEquals("9AM", updatedGard.getTimeing());
 	}
-	
+
+	@Disabled
 	@Test
-	void delete()  throws RecordNotFoundException{
-		GardTraineeEntity gard=gardsTranningServ.findByPk(79);
+	void delete() throws RecordNotFoundException {
+		GardTraineeEntity gard = gardsTranningServ.findByPk(79);
 		gardsTranningServ.delete(gard);
 		assertThrows(RecordNotFoundException.class, () -> {
 			gardsTranningServ.findByPk(gard.getId());
@@ -79,20 +80,39 @@ public class GardTraineeTest {
 		assertEquals(12, gard.getUserId());
 		assertEquals(java.sql.Timestamp.valueOf(" 2022-03-28 11:04:39.092"), gard.getDate());
 	}
+
 	@Test
-	void  getGardBySalaryId()
-	{
+	void findByname() {
+		GardTraineeEntity gard = gardsTranningServ.getByName("Rohith Sai");
+		assertEquals("Rohith Sai", gard.getName());
+		assertEquals(12, gard.getUserId());
+		assertEquals(java.sql.Timestamp.valueOf(" 2022-03-28 11:04:39.092"), gard.getDate());
+	}
+
+	@Test
+	void search() {
+		GardTraineeEntity serachGard = gardsTranningServ.findByPk(2);
+		List<GardTraineeEntity> gard = gardsTranningServ.search(serachGard);
+		for (GardTraineeEntity gards : gard) {
+			assertEquals("Rohith Sai", gards.getName());
+			assertEquals(12, gards.getUserId());
+			assertEquals(java.sql.Timestamp.valueOf(" 2022-03-28 11:04:39.092"), gards.getDate());
+		}
+
+	}
+
+	@Test
+	void getGardBySalaryId() {
 		GardTraineeEntity gard = gardsTranningServ.getGardBySalaryId(53);
 		assertEquals("Rohith Sai", gard.getName());
 		assertEquals(12, gard.getUserId());
 	}
-	
+
 	@Test
-	void getAllGardTraineeByShiftId()
-	{
-		List<GardTraineeEntity> gardList=gardsTranningServ.getAllGardTraineeByShiftId(21);
-		assertEquals("Rohith Sai",gardList.get(1).getName());
-		assertEquals("Ankit kumar",gardList.get(0).getName());
+	void getAllGardTraineeByShiftId() {
+		List<GardTraineeEntity> gardList = gardsTranningServ.getAllGardTraineeByShiftId(21);
+		assertEquals("Rohith Sai", gardList.get(1).getName());
+		assertEquals("Ankit kumar", gardList.get(0).getName());
 	}
 
 }

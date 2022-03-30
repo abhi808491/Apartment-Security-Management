@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -61,7 +62,7 @@ public class GardSalaryTest {
 	void deleteTest() {
 		GardSalaryEntity gard = gardSalaryServ.findByPk(54);
 		gardSalaryServ.delete(gard);
-		
+
 		assertThrows(RecordNotFoundException.class, () -> {
 			gardSalaryServ.findByPk(gard.getId());
 		});
@@ -70,8 +71,27 @@ public class GardSalaryTest {
 	@Test
 	void findByPk() {
 		GardSalaryEntity gard = gardSalaryServ.findByPk(52);
-		assertEquals("Arun", gard.getCreatedBy());
-		assertEquals(22500, gard.getAmount());
+		assertEquals("Dev Singh", gard.getCreatedBy());
+		assertEquals(21000, gard.getAmount());
+	}
+
+	@Test
+	void findByName() {
+		GardSalaryEntity gard = gardSalaryServ.findByName("Ankit kumar");
+		assertEquals("Ankit kumar", gard.getName());
+		assertEquals(21000, gard.getAmount());
+
+	}
+
+	@Test
+	void search() {
+		GardSalaryEntity gards = gardSalaryServ.findByPk(52);
+		List<GardSalaryEntity> gardList = gardSalaryServ.search(gards);
+		for (GardSalaryEntity gard : gardList) {
+			assertEquals("Ankit kumar", gard.getName());
+			assertEquals(21000, gard.getAmount());
+		}
+
 	}
 
 }

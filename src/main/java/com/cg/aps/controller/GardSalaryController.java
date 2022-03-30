@@ -24,7 +24,7 @@ public class GardSalaryController {
 	@Autowired
 	GardSalaryServiceInt gardSalaryServ;
 
-	// serach gard
+	// search gard
 	@PostMapping("/getgards")
 	public ResponseEntity<List<GardSalaryEntity>> search(@RequestBody GardSalaryEntity bean) {
 		List<GardSalaryEntity> al = gardSalaryServ.search(bean);
@@ -38,7 +38,7 @@ public class GardSalaryController {
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
 
-	// get gards by PK
+	// get gard by PK
 	@GetMapping("/getgardsbyId/{id}")
 	public ResponseEntity<GardSalaryEntity> findByPk(@PathVariable("id") long id) {
 		return new ResponseEntity<GardSalaryEntity>(gardSalaryServ.findByPk(id), HttpStatus.OK);
@@ -62,11 +62,11 @@ public class GardSalaryController {
 		gardSalaryServ.delete(bean);
 	}
 
-	//get page
-		@GetMapping("/salary/{pageNo}/{pageSize}")
-		public ResponseEntity<List<GardSalaryEntity>> searchPage(@PathVariable Long pageNo,
-				@PathVariable Integer pageSize) {
-			List<GardSalaryEntity> al = gardSalaryServ.search( pageNo, pageSize);
-			return new ResponseEntity<>(al, HttpStatus.OK);
-}
+	// get page
+	@GetMapping("/salary/{pageNo}/{pageSize}")
+	public ResponseEntity<List<GardSalaryEntity>> searchPage(@PathVariable Long pageNo,
+			@PathVariable Integer pageSize) {
+		List<GardSalaryEntity> al = gardSalaryServ.search(pageNo, pageSize);
+		return new ResponseEntity<>(al, HttpStatus.OK);
+	}
 }
