@@ -31,6 +31,11 @@ public class GardTraineeController {
 		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
 
+	// add gard
+	@PostMapping("/addgards")
+	public ResponseEntity<Long> addGard(@RequestBody GardTraineeEntity gardTrainee) {
+		return new ResponseEntity<Long>(gardsTranningServ.addGard(gardTrainee), HttpStatus.OK);
+	}
 
 	// get gards by PK
 	@GetMapping("/getgards/id/{id}")
@@ -62,36 +67,32 @@ public class GardTraineeController {
 	@PostMapping("/gard/{pageNo}/{pageSize}")
 	public ResponseEntity<List<GardTraineeEntity>> searchPage(@PathVariable Long pageNo,
 			@PathVariable Integer pageSize) {
-		List<GardTraineeEntity> al = gardsTranningServ.search( pageNo, pageSize);
+		List<GardTraineeEntity> al = gardsTranningServ.search(pageNo, pageSize);
 		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
 
+	// get gard using shift id by relationship
 	@GetMapping("/getGardByShift/{id}")
 	public ResponseEntity<List<GardTraineeEntity>> getAllGardTraineeByShiftId(@PathVariable("id") long id) {
 		return new ResponseEntity<>(gardsTranningServ.getAllGardTraineeByShiftId(id), HttpStatus.OK);
 	}
 
+	// get gard using salary id by relationship
 	@GetMapping("/getGardBySalary/{id}")
 	public ResponseEntity<GardTraineeEntity> getGardBySalaryId(long id) {
 		return new ResponseEntity<GardTraineeEntity>(gardsTranningServ.getGardBySalaryId(id), HttpStatus.OK);
 	}
-	
-	@PostMapping("/addgards")
-	public ResponseEntity<Long> addGard(@RequestBody GardTraineeEntity gardTrainee)
-	{
-		return new ResponseEntity<Long>(gardsTranningServ.addGard(gardTrainee),HttpStatus.OK);
-	}
-		
+
+	// map gard salary with gardTrainee
 	@GetMapping("/mapsalary/{gardPk}/{salaryPk}")
-	public GardTraineeEntity  mapSalary(@PathVariable long gardPk,@PathVariable long salaryPk)
-	{
+	public GardTraineeEntity mapSalary(@PathVariable long gardPk, @PathVariable long salaryPk) {
 		return gardsTranningServ.mapSalary(gardPk, salaryPk);
 	}
 
+	// map gard shift with gardTrainee
 	@GetMapping("/mapShift/{gardPk}/{shiftPk}")
-	public GardTraineeEntity  mapShift(@PathVariable long gardPk,@PathVariable long shiftPk)
-	{
+	public GardTraineeEntity mapShift(@PathVariable long gardPk, @PathVariable long shiftPk) {
 		return gardsTranningServ.mapShift(gardPk, shiftPk);
 	}
-	
+
 }

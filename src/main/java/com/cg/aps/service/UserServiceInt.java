@@ -21,16 +21,13 @@ public interface UserServiceInt {
 
 	public List<UserEntity> search(UserEntity bean);
 
-
 	public boolean changePassword(Long id, String oldPassword, String newPassword);
 
 	public long registerUser(RegisterUserRequest request);
 
 	public boolean forgetPassword(String login);
 
-	public UserEntity addGard(long userPk,long gardPk);
+	public UserEntity addGard(long userPk, long gardPk);
 
 	public UserEntity addFlat(long userPk, long flatPk);
-	
-	public UserEntity addVehicle(long userPk, long vehiclePk);
 }

@@ -46,6 +46,10 @@ public class FlatEntity extends BaseEntity {
 	@OneToOne(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	
 	private UserEntity user;
+	
+	@OneToMany(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<VehicleEntity> vehicle;
 
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "flat_id", referencedColumnName = "id")

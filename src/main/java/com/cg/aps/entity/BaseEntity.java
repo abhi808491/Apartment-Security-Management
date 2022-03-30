@@ -5,7 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 import lombok.Data;
 

@@ -102,11 +102,6 @@ public class UserController {
 	public UserEntity addFlat(@PathVariable("userPk") long userPk,@PathVariable("flatPk") long flatPk) {
 		return userServ.addFlat(userPk, flatPk);
 	}
-	//AddVehicle with userPk(Relationship)
-	@GetMapping("/addVehicle/{userPk}/{vehiclePk}")
-	public UserEntity addVehicle(@PathVariable("userPk") long userPk,@PathVariable("vehiclePk") long vehiclePk) {
-		return userServ.addVehicle(userPk, vehiclePk);
-	}
 
 
 }

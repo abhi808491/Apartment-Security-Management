@@ -62,14 +62,12 @@ public class GardShiftController {
 	public void delete(@RequestBody GardShiftEntity bean) {
 		gardShiftServ.delete(bean);
 	}
-	
-	//get page
-	@GetMapping("/shift/{pageNo}/{pageSize}")
-	public ResponseEntity<List<GardShiftEntity>> searchPage(@PathVariable Long pageNo,
-			@PathVariable Integer pageSize) {
-		List<GardShiftEntity> al = gardShiftServ.search( pageNo, pageSize);
-		return new ResponseEntity<>(al, HttpStatus.OK);
-	
 
-}
+	// get page
+	@GetMapping("/shift/{pageNo}/{pageSize}")
+	public ResponseEntity<List<GardShiftEntity>> searchPage(@PathVariable Long pageNo, @PathVariable Integer pageSize) {
+		List<GardShiftEntity> al = gardShiftServ.search(pageNo, pageSize);
+		return new ResponseEntity<>(al, HttpStatus.OK);
+
+	}
 }

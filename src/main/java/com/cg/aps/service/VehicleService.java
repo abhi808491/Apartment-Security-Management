@@ -10,16 +10,22 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import com.cg.aps.entity.BaseEntity;
+import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.UserEntity;
 import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
+import com.cg.aps.repository.FlatDAOInt;
 import com.cg.aps.repository.VehicleRepository;
 @Service
 public class VehicleService implements VehicleServiceInt{
 	
 	@Autowired
 	VehicleRepository vehRepo;
+	
+	
+	@Autowired
+	 FlatDAOInt flatDAOint;
 	
 	@Override
 	public long add(VehicleEntity bean) {
@@ -107,10 +113,20 @@ public class VehicleService implements VehicleServiceInt{
 		return null;
 	}
 
+
 	@Override
-	public VehicleEntity getVehicleOfUser(Long userId) {
-		// TODO Auto-generated method stub
-		return vehRepo.getVehicleOfUser(userId);
+	public List<VehicleEntity> getVehicleByFlatId(Long flatId) {
+		return vehRepo.getVehicleOfFlat(flatId);
+		}
+
+	@Override
+	public VehicleEntity addVehicle(long vehiclePk, long flatPk) {
+		
+		VehicleEntity vehicle=vehRepo.getById(vehiclePk);
+		FlatEntity flat=flatDAOint.getById(flatPk);
+		 vehicle.setFlat(flat);
+		 vehRepo.save(vehicle);
+		 return vehicle;
 	}
 
 }

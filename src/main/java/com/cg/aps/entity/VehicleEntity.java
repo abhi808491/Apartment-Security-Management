@@ -30,9 +30,11 @@ public class VehicleEntity extends BaseEntity {
 	private Date date;
 	private String vehicleNo;
 	private String vehicleType;
-	
-	@OneToOne(mappedBy="vehicleEntity",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private UserEntity userEntity;
+
+	@ManyToOne(cascade= CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JoinColumn(name="flat_id",referencedColumnName="id")
+	@JsonIgnore
+	private FlatEntity flat;
 
 
 	@Override

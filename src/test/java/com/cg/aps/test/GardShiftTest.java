@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class GardShiftTest {
 		GardShiftEntity gardShift = new GardShiftEntity();
 		gardShift.setId(25);
 		gardShift.setCreatedBy("Abhishek Kumar");
-	    gardShift.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
+		gardShift.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		gardShift.setUserId(35);
 		gardShift.setName("Navin");
 		gardShift.setTime("2PM");
@@ -45,6 +46,7 @@ public class GardShiftTest {
 
 	}
 
+	@Disabled
 	@Test
 	void updateTest() {
 		GardShiftEntity gardShift = gardShiftServ.findByPk(13);
@@ -68,10 +70,28 @@ public class GardShiftTest {
 		});
 	}
 
+	@Test
 	void findByPk() {
-		GardShiftEntity gardShift = gardShiftServ.findByPk(11);
-		assertEquals("Ankit", gardShift.getModifiedBy());
-		assertEquals("9AM to 6PM", gardShift.getTime());
+		GardShiftEntity gardShift = gardShiftServ.findByPk(21);
+		assertEquals("Morning Shift", gardShift.getName());
+		assertEquals("6AM to 4PM", gardShift.getTime());
+	}
+
+	@Test
+	void getByName() {
+		GardShiftEntity gardShift = gardShiftServ.getByName("Morning Shift");
+		assertEquals("Morning Shift", gardShift.getName());
+		assertEquals("6AM to 4PM", gardShift.getTime());
+	}
+
+	@Test
+	void serach() {
+		GardShiftEntity gardShift = gardShiftServ.findByPk(21);
+		List<GardShiftEntity> searchShift = gardShiftServ.search(gardShift);
+		for (GardShiftEntity shift : searchShift) {
+			assertEquals("Morning Shift", shift.getName());
+			assertEquals("6AM to 4PM", shift.getTime());
+		}
 	}
 
 }
