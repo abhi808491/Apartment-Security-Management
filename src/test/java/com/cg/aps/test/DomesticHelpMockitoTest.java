@@ -25,117 +25,104 @@ public class DomesticHelpMockitoTest {
 	DomesticHelpService domesticService;
 	@MockBean
 	DomesticHelpDAOInt domesticHelpDAOInt;
+
 	@BeforeEach
-	void init()
-	{
+	void init() {
 		MockitoAnnotations.openMocks(this);
 	}
+
 	@Test
-	void addTest()
-	{
-		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
+	void addTest() {
+		DomesticHelpEntity domesticHelp = new DomesticHelpEntity();
 		domesticHelp.setId(1);
 		domesticHelp.setCreatedBy("rishitha");
 		domesticHelp.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedBy("rishitha");
-		domesticHelp.setOwnerName("Ramesh");
 		domesticHelp.setArrivalTime("7:00 AM");
 		domesticHelp.setDepartureTime("11:00 AM");
-		domesticHelp.setFlatNo("300B");
-		domesticHelp.setHelpType("cooking");
+		domesticHelp.setHelpType("electricity");
 		Mockito.when(domesticHelpDAOInt.save(domesticHelp)).thenReturn(domesticHelp);
-		long num=domesticService.add(domesticHelp);
-		assertEquals(1,num);	
+		long num = domesticService.add(domesticHelp);
+		assertEquals(1, num);
 	}
+
 	@Test
-	void updateTest() 
-	{
-		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
+	void updateTest() {
+		DomesticHelpEntity domesticHelp = new DomesticHelpEntity();
 		domesticHelp.setId(1);
 		domesticHelp.setCreatedBy("rishitha");
 		domesticHelp.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedBy("rishitha");
-		domesticHelp.setOwnerName("Ravi");
+		domesticHelp.setName("Ravi");
 		domesticHelp.setArrivalTime("7:00 AM");
 		domesticHelp.setDepartureTime("11:00 AM");
-		domesticHelp.setFlatNo("300B");
-		domesticHelp.setHelpType("cooking");
+		domesticHelp.setHelpType("gardenini");
 		Mockito.when(domesticHelpDAOInt.findById((long) 1)).thenReturn(Optional.of(domesticHelp));
 		Mockito.when(domesticHelpDAOInt.save(domesticHelp)).thenReturn(domesticHelp);
 		domesticService.update(domesticHelp);
-		assertEquals("Ravi",domesticHelp.getOwnerName());	
+		assertEquals("Ravi", domesticHelp.getName());
 	}
+
 	@Test
-	void findByNameTest() 
-	{
-		List<DomesticHelpEntity> domesticHelpList=new ArrayList();
-		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
+	void findByNameTest() {
+		List<DomesticHelpEntity> domesticHelpList = new ArrayList();
+		DomesticHelpEntity domesticHelp = new DomesticHelpEntity();
 		domesticHelp.setId(1);
 		domesticHelp.setCreatedBy("rishitha");
 		domesticHelp.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedBy("rishitha");
-		domesticHelp.setOwnerName("Ramesh");
+		domesticHelp.setName("Ramesh");
 		domesticHelp.setArrivalTime("7:00 AM");
 		domesticHelp.setDepartureTime("11:00 AM");
-		domesticHelp.setFlatNo("300B");
-		domesticHelp.setHelpType("cooking");
+		domesticHelp.setHelpType("electricity");
 		domesticHelpList.add(domesticHelp);
-		Mockito.when(domesticHelpDAOInt.findByOwnerName("Ramesh")).thenReturn(domesticHelpList);
-		List<DomesticHelpEntity> delListEnt=domesticService.findByName("Ramesh");
-		assertEquals(1,delListEnt.size());
+		Mockito.when(domesticHelpDAOInt.findByName("Ramesh")).thenReturn(domesticHelpList);
+		List<DomesticHelpEntity> delListEnt = domesticService.findByName("Ramesh");
+		assertEquals(1, delListEnt.size());
 	}
+
 	@Test
-	void findByPkTest() 
-	{
-		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
+	void findByPkTest() {
+		DomesticHelpEntity domesticHelp = new DomesticHelpEntity();
 		domesticHelp.setId(1);
 		domesticHelp.setCreatedBy("rishitha");
 		domesticHelp.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedBy("rishitha");
-		domesticHelp.setOwnerName("Ramesh");
 		domesticHelp.setArrivalTime("7:00 AM");
 		domesticHelp.setDepartureTime("11:00 AM");
-		domesticHelp.setFlatNo("300B");
-		domesticHelp.setHelpType("cooking");
+		domesticHelp.setHelpType("electricity");
 		Mockito.when(domesticHelpDAOInt.findById((long) 1)).thenReturn(Optional.of(domesticHelp));
-		DomesticHelpEntity delEnt=domesticService.findByPk(1);
-		assertEquals(1,delEnt.getId());
-		assertEquals("rishitha",delEnt.getCreatedBy());
-		assertEquals("rishitha",delEnt.getModifiedBy());
-		assertEquals("Ramesh",delEnt.getOwnerName());
-		assertEquals("300B",delEnt.getFlatNo());
-		assertEquals("cooking",delEnt.getHelpType());
+		DomesticHelpEntity delEnt = domesticService.findByPk(1);
+		assertEquals(1, delEnt.getId());
+		assertEquals("rishitha", delEnt.getCreatedBy());
+		assertEquals("rishitha", delEnt.getModifiedBy());
+		assertEquals("electricity", delEnt.getHelpType());
 	}
+
 	@Test
-	void deleteTest()
-	{
-		DomesticHelpEntity domesticHelp=new DomesticHelpEntity();
+	void deleteTest() {
+		DomesticHelpEntity domesticHelp = new DomesticHelpEntity();
 		domesticHelp.setId(1);
 		domesticHelp.setCreatedBy("rishitha");
 		domesticHelp.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedDateTime(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setDate(java.sql.Timestamp.valueOf("2022-03-23 10:10:10.0"));
 		domesticHelp.setModifiedBy("rishitha");
-		domesticHelp.setOwnerName("Ramesh");
 		domesticHelp.setArrivalTime("7:00 AM");
 		domesticHelp.setDepartureTime("11:00 AM");
-		domesticHelp.setFlatNo("300B");
-		domesticHelp.setHelpType("cooking");
+		domesticHelp.setHelpType("gardening");
 		Mockito.when(domesticHelpDAOInt.findById((long) 1)).thenReturn(Optional.of(domesticHelp));
 		Mockito.doNothing().when(domesticHelpDAOInt).delete(domesticHelp);
 		domesticService.delete(domesticHelp);
-		
-	}
-	
-	
 
+	}
 
 }

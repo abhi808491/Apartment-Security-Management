@@ -51,8 +51,8 @@ public class DomesticHelpController {
 
 	// find DomesticHelpEntity by Id
 	@GetMapping("/domesticHelp/{id}")
-	ResponseEntity<DomesticHelpEntity>  findByPk(@PathVariable("id") int id) {
-		return new ResponseEntity<>(domesticHelpService.findByPk(id),HttpStatus.OK);
+	ResponseEntity<DomesticHelpEntity> findByPk(@PathVariable("id") int id) {
+		return new ResponseEntity<>(domesticHelpService.findByPk(id), HttpStatus.OK);
 	}
 
 	// search DomesticHelpEntity
@@ -69,6 +69,20 @@ public class DomesticHelpController {
 		List<DomesticHelpEntity> domEnt = domesticHelpService.search(pageNo, pageSize);
 		return new ResponseEntity<>(domEnt, HttpStatus.OK);
 	}
-	
+
+	// add guard to domesticHelp
+	@GetMapping("mapguardtodomesticHelp/{domesticHelpId}/{guardId}")
+	ResponseEntity<DomesticHelpEntity> mapDomesticHelptoguard(@PathVariable("domesticHelpId") Long domesticHelpId,
+			@PathVariable("guardId") Long guardId) {
+		return new ResponseEntity<>(domesticHelpService.mapDomesticHelpToGuard(domesticHelpId, guardId), HttpStatus.OK);
+	}
+
+	// find domesticHelpList By guardId
+	@GetMapping("domesticHelpListByguard/{guardId}")
+	ResponseEntity<List<DomesticHelpEntity>> getDomesticHelpByGuardId(@PathVariable("guardId") Long guardId) {
+		List<DomesticHelpEntity> domEnt = domesticHelpService.getDomesticHelpByGuardId(guardId);
+		return new ResponseEntity<>(domEnt, HttpStatus.OK);
+
+	}
 
 }
