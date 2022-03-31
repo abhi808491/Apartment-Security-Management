@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.cg.aps.entity.DeliveryEntity;
+import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.entity.VisitorEntity;
 
 @Repository
 public interface GardTraineeDAOInt extends JpaRepository<GardTraineeEntity, Long> {
@@ -23,4 +26,7 @@ public interface GardTraineeDAOInt extends JpaRepository<GardTraineeEntity, Long
 	// query to join gard and salary;
 	@Query(value = " select * from gard_trainee_entity join gard_salary_entity on gard_trainee_entity.salary_id=gard_salary_entity.id where gard_salary_entity.id=:sId", nativeQuery = true)
 	GardTraineeEntity getGardBySalaryId(@Param("sId") long id);
-}
+
+
+	}
+

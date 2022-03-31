@@ -13,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.cg.aps.dto.GardTraineeDto;
+import com.cg.aps.entity.DeliveryEntity;
+import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.GardShiftEntity;
 import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.service.GardTraineeServiceInt;
 
@@ -113,6 +117,37 @@ public class GardTraineeTest {
 		List<GardTraineeEntity> gardList = gardsTranningServ.getAllGardTraineeByShiftId(21);
 		assertEquals("Rohith Sai", gardList.get(1).getName());
 		assertEquals("Ankit kumar", gardList.get(0).getName());
+	}
+	@Test
+	void getDomesticHelpByGardId()
+	{
+		List<DomesticHelpEntity> list = gardsTranningServ.getDomesticHelpByGardId(1);
+		assertEquals("Vinod", list.get(0).getName());
+		assertEquals("Ronit", list.get(1).getName());
+	}
+	
+	@Test
+	void getDeliveryListByGardId()
+	{
+		List<DeliveryEntity> list = gardsTranningServ.getDeliveryListByGardId(2);
+		assertEquals("Ram Krishina", list.get(0).getOwnerName());
+		assertEquals("Delivered", list.get(0).getStatus());
+	}
+	
+	@Test
+	void getVisitorByGardId()
+	{
+		List<VisitorEntity> list = gardsTranningServ.getVisitorByGardId(9);
+		assertEquals("Eahul", list.get(0).getVisitorName());
+		assertEquals("Sabnam", list.get(1).getVisitorName());
+	}
+	
+	@Test
+	void getSecurityByGard()
+	{
+		List<SecurityEntity> list = gardsTranningServ.getSecurityByGard(2);
+		assertEquals("Abhishek Kumar", list.get(0).getCreatedBy());
+		assertEquals("Fire alert", list.get(0).getAlert());
 	}
 
 }

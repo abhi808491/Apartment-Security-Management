@@ -44,7 +44,6 @@ public class FlatEntity extends BaseEntity {
 	FlatRentEntity flatrent;
 		
 	@OneToOne(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	
 	private UserEntity user;
 	
 	@OneToMany(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
