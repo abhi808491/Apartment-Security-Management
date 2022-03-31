@@ -33,6 +33,11 @@ public class VisitorEntity extends BaseEntity {
 	@JoinColumn(name = "flatid", referencedColumnName = "id")
 	private FlatEntity visitor_flat;
 	
+	@JsonIgnore
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name = "gardid", referencedColumnName = "id")
+	private GardTraineeEntity gard_flat;
+	
 	
 	@Override
 	public String getKey() {

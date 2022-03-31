@@ -17,4 +17,7 @@ public interface VisitorDAOInt extends JpaRepository<VisitorEntity, Long>{
 	
 @Query(value = "select * from visitor_entity inner join flat_entity on visitor_Entity.flatid=flat_entity.id where flat_entity.id=:flatId", nativeQuery = true)
 public List<VisitorEntity> getVisitorByFlat(@Param("flatId") Long flat_id);
+
+@Query(value = "select * from visitor_entity join gard_trainee_entity on visitor_Entity.gardid=gard_trainee_entity.id where gard_trainee_entity.id=:gardId", nativeQuery = true)
+public List<VisitorEntity> getVisitorByGard(@Param("gardId") Long gard_id);
 }

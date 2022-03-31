@@ -16,4 +16,6 @@ public interface VisitorServiceInt {
 	public List<VisitorEntity> search(VisitorEntity visitor) ;
 	public List<VisitorEntity> getVisitorByFlatId(long id);
 	public VisitorEntity addFlatRelationship(long visitorPk, long flatPk);
+	public VisitorEntity addRelationship(long visitorPk, long gardPk, long flatPk);
+	public List<VisitorEntity> getVisitorByGardId(long id);
 }
