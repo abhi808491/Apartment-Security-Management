@@ -71,6 +71,15 @@ public class VisitorController {
 			VisitorEntity visitor = visServ.addFlatRelationship(visitorId, flatId);
 			return new ResponseEntity<>(visitor,HttpStatus.OK);
 }
-	
-	
+	@GetMapping("/VisitorRelationship/{visitorId}/{gardId}/{flatId}")
+	public ResponseEntity<VisitorEntity> addgard(@PathVariable Long visitorId,@PathVariable Long gardId,@PathVariable Long flatId){
+			VisitorEntity visitor = visServ.addRelationship(visitorId, gardId,flatId);
+			return new ResponseEntity<>(visitor,HttpStatus.OK);
+}	
+	@GetMapping("visitorByGardId/{gardId}")
+	ResponseEntity<List<VisitorEntity>> getVisitorByGardId(@PathVariable("gardId") Long gardId)
+	{
+		List<VisitorEntity> lis= visServ.getVisitorByGardId(gardId);
+		return new ResponseEntity<>(lis, HttpStatus.OK);
+	}
 }
