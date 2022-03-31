@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.aps.dto.RegisterUserRequest;
 import com.cg.aps.dto.UpdateUserPasswordRequest;
 import com.cg.aps.entity.UserEntity;
 
@@ -35,9 +34,9 @@ public class UserController {
 	}
 
 	// add Users
-	@PostMapping("/addUsers")
-	public ResponseEntity<Long> add(@Valid @RequestBody UserEntity bean) {
-		Long id = userServ.add(bean);
+	@PostMapping("/addUsers/{id}")
+	public ResponseEntity<Long> add(@Valid @RequestBody UserEntity bean,@PathVariable("id") long adminPk) {
+		Long id = userServ.add(bean,adminPk);
 		return new ResponseEntity<Long>(id, HttpStatus.OK);
 	}
 
@@ -52,6 +51,7 @@ public class UserController {
 	public ResponseEntity<UserEntity> getByLogin(@Valid @PathVariable("login") String Login) {
 		return new ResponseEntity<UserEntity>(userServ.findByLogin(Login), HttpStatus.OK);
 	}
+	
 
 	// update users
 	@PatchMapping("/updateUsers")
@@ -83,15 +83,19 @@ public class UserController {
 		List<UserEntity> al = userServ.search(pageNo, pageSize);
 		return new ResponseEntity<>(al, HttpStatus.OK);
 	}
-
-	// Register user
-	@PostMapping("/loginAdmin")
-	public ResponseEntity<String> registerUser(@RequestBody RegisterUserRequest request) {
-		userServ.registerUser(request);
-
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 	
+	//login
+	
+	@PostMapping("/authenticate")
+	public ResponseEntity<String>authenticate(@RequestBody UserEntity bean){
+			userServ.authenticate(bean);
+			return new ResponseEntity<String>("Logged In",HttpStatus.OK);
+	}
+	@PostMapping("/registerAdmin")
+	public ResponseEntity<Long> registerAdmin(@Valid @RequestBody UserEntity bean) {
+		Long id = userServ.registerAdmin(bean);
+		return new ResponseEntity<Long>(id, HttpStatus.OK);
+	}
 	//AddGard with userPk(Relationship)
 	@GetMapping("/addGard/{userPk}/{gardPk}")
 	public UserEntity addGard(@PathVariable("userPk") long userPk,@PathVariable("gardPk") long gardPk) {

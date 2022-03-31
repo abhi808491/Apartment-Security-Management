@@ -13,11 +13,12 @@ import com.cg.aps.repository.FlatDAOInt;
 import com.cg.aps.repository.GardTraineeDAOInt;
 import com.cg.aps.repository.UserDAOInt;
 import com.cg.aps.repository.VehicleRepository;
-import com.cg.aps.dto.RegisterUserRequest;
+
 import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.UserEntity;
 import com.cg.aps.entity.VehicleEntity;
+import com.cg.aps.exception.ApplicationException;
 import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
@@ -35,12 +36,19 @@ public class UserService implements UserServiceInt {
 	FlatDAOInt flatDAOint;
 
 	@Override
-	public long add(UserEntity bean) {
+	
+	public long add(UserEntity bean, long adminPk) {
 		Optional<UserEntity> user = userDao.findById(bean.getId());
+		UserEntity admin = userDao.getById(adminPk);
 		if (user.isPresent()) {
 			throw new DuplicateRecordException("Record already exist there no duplicate allowed");
+		} else {
+			if (admin.getRoleId() == 1) {
+				userDao.save(bean);
+			} else {
+				throw new ApplicationException("You are not an Admin!");
+			}
 		}
-		userDao.save(bean);
 		return bean.getId();
 	}
 
@@ -51,7 +59,16 @@ public class UserService implements UserServiceInt {
 			throw new RecordNotFoundException("Record not found with given entity details");
 		}
 		userDao.save(bean);
+	}
 
+	@Override
+	public long registerAdmin(UserEntity bean) {
+		Optional<UserEntity> user = userDao.findById(bean.getId());
+		if (user.isPresent()) {
+			throw new DuplicateRecordException("Record already exist there no duplicate allowed");
+		}
+		userDao.save(bean);
+		return bean.getId();
 	}
 
 	@Override
@@ -125,15 +142,6 @@ public class UserService implements UserServiceInt {
 	}
 
 	@Override
-	public long registerUser(RegisterUserRequest request) {
-		UserEntity user = UserEntity.builder().firstName(request.getFirstName()).lastName(request.getLastName())
-				.emailId(request.getEmailId()).password(request.getPassword()).build();
-
-		UserEntity user1 = userDao.save(user);
-		return user1.getId();
-	}
-
-	@Override
 	public boolean forgetPassword(String login) {
 		UserEntity user = userDao.findByLogin(login);
 		if (user == null) {
@@ -150,6 +158,20 @@ public class UserService implements UserServiceInt {
 		userDao.save(user);
 		return user;
 
+	}
+
+	@Override
+	public UserEntity authenticate(UserEntity bean) {
+		Optional<UserEntity> optional = userDao.findById(bean.getId());
+		if (optional.isPresent()) {
+			UserEntity temp = optional.get();
+			if (temp.getPassword() == bean.getPassword() && temp.getEmailId() == bean.getEmailId()) {
+				return temp;
+			} else {
+				throw new ApplicationException("Password or Email is incorrect");
+			}
+		}
+		return bean;
 	}
 
 	@Override

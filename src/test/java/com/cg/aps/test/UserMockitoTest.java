@@ -25,7 +25,7 @@ class UserMockitoTest {
 	UserService userServ;
 
 	@MockBean
-	UserDAOInt userDAOInt;
+	UserDAOInt userDao;
 
 	@BeforeEach
 	void init() {
@@ -34,6 +34,7 @@ class UserMockitoTest {
 
 	@Test
 	void addTest() {
+		Long adminPk=(long) 1;
 		UserEntity user = new UserEntity();
 		user.setId(5);
 		user.setCreatedBy("Ram");
@@ -47,12 +48,13 @@ class UserMockitoTest {
 		user.setFirstName("Ram");
 		user.setLastName("Kumar");
 		user.setRoleId(0);
-		
-		Mockito.when(userDAOInt.save(user)).thenReturn(user);
-		long id = userServ.add(user);
+		if(adminPk==1) {	
+		Mockito.when(userDao.save(user)).thenReturn(user);
+		assertEquals(5,user.getId());
 		assertEquals("Ram", user.getCreatedBy());
 		assertEquals("8051148432", user.getMobileNo());
-
+		
+		}
 	}
 
 	@Test
@@ -68,8 +70,8 @@ class UserMockitoTest {
 		user.setMobileNo("8051148432");
 		user.setPassword("ram");
 		user.setLastName("Kumar");
-		Mockito.when(userDAOInt.findById((long) 5)).thenReturn(Optional.of(user));
-		Mockito.when(userDAOInt.save(user)).thenReturn(user);
+		Mockito.when(userDao.findById((long) 5)).thenReturn(Optional.of(user));
+		Mockito.when(userDao.save(user)).thenReturn(user);
 		userServ.update(user);
 		assertEquals("Ram", user.getFirstName());
 
@@ -88,7 +90,7 @@ class UserMockitoTest {
 		user.setMobileNo("8051148432");
 		user.setPassword("ram");
 		user.setLastName("Kumar");
-		Mockito.when(userDAOInt.findById((long) 5)).thenReturn(Optional.of(user));
+		Mockito.when(userDao.findById((long) 5)).thenReturn(Optional.of(user));
 		userServ.delete(user);
 
 	}
@@ -106,7 +108,7 @@ class UserMockitoTest {
 		user.setMobileNo("8051148432");
 		user.setPassword("ram");
 		user.setLastName("Kumar");
-		Mockito.when(userDAOInt.findById((long) 6)).thenReturn(Optional.of(user));
+		Mockito.when(userDao.findById((long) 6)).thenReturn(Optional.of(user));
 
 	}
 
