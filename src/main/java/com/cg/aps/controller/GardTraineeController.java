@@ -15,14 +15,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.aps.dto.GardTraineeDto;
+import com.cg.aps.entity.DeliveryEntity;
+import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VisitorEntity;
+import com.cg.aps.service.DeliveryServiceInt;
+import com.cg.aps.service.DomesticHelpServiceInt;
 import com.cg.aps.service.GardTraineeServiceInt;
+import com.cg.aps.service.SecurityServiceInt;
+import com.cg.aps.service.VisitorServiceInt;
 
 @RestController
 public class GardTraineeController {
 	@Autowired
 	GardTraineeServiceInt gardsTranningServ;
+
+	@Autowired
+	VisitorServiceInt visServ;
+
+	@Autowired
+	DomesticHelpServiceInt domesticHelpService;
+
+	@Autowired
+	DeliveryServiceInt deliveryService;
+
+	@Autowired
+	SecurityServiceInt secServ;
 
 	// search gard
 	@PostMapping("/searchgards")
@@ -93,6 +112,37 @@ public class GardTraineeController {
 	@GetMapping("/mapShift/{gardPk}/{shiftPk}")
 	public GardTraineeEntity mapShift(@PathVariable long gardPk, @PathVariable long shiftPk) {
 		return gardsTranningServ.mapShift(gardPk, shiftPk);
+	}
+
+	// get visitor using gard id
+	@GetMapping("getvisitorByGardId/{gardId}")
+	ResponseEntity<List<VisitorEntity>> getVisitorByGardId(@PathVariable("gardId") Long gardId) {
+		List<VisitorEntity> lis = visServ.getVisitorByGardId(gardId);
+		return new ResponseEntity<>(lis, HttpStatus.OK);
+	}
+
+	// find domesticHelpList By guardId
+	@GetMapping("getdomesticHelpListByguard/{gardId}")
+	ResponseEntity<List<DomesticHelpEntity>> getDomesticHelpByGuardId(@PathVariable("gardId") Long gardId) {
+		List<DomesticHelpEntity> domEnt = domesticHelpService.getDomesticHelpByGuardId(gardId);
+		return new ResponseEntity<>(domEnt, HttpStatus.OK);
+
+	}
+
+	// find deliveryList By guardId
+	@GetMapping("getdeliveryListBygard/{gardId}")
+	ResponseEntity<List<DeliveryEntity>> getDeliveriesByGardId(@PathVariable("gardId") Long gardId) {
+		List<DeliveryEntity> delEnt = deliveryService.getDeliveryListByGuardId(gardId);
+		return new ResponseEntity<>(delEnt, HttpStatus.OK);
+
+	}
+
+	// get security using gard id
+	@GetMapping("getSecurityByGard/{gardId}")
+	ResponseEntity<List<SecurityEntity>> getSecurityByGardId(@PathVariable("gardId") Long gardId) {
+		List<SecurityEntity> lis = secServ.getSecurityByGard(gardId);
+		return new ResponseEntity<>(lis, HttpStatus.OK);
+
 	}
 
 }

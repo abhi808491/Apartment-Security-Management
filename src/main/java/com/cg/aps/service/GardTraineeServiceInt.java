@@ -3,7 +3,11 @@ package com.cg.aps.service;
 import java.util.List;
 
 import com.cg.aps.dto.GardTraineeDto;
+import com.cg.aps.entity.DeliveryEntity;
+import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VisitorEntity;
 
 public interface GardTraineeServiceInt {
 
@@ -28,5 +32,13 @@ public interface GardTraineeServiceInt {
 	public GardTraineeEntity mapShift(long gardPk, long shiftPk);
 
 	public GardTraineeEntity mapSalary(long gardPk, long salaryPk);
+	
+	public List<DomesticHelpEntity> getDomesticHelpByGardId(long id);
+	
+	public List<DeliveryEntity> getDeliveryListByGardId(long id);
+	
+	public List<VisitorEntity> getVisitorByGardId(long id);
+	
+	public List<SecurityEntity> getSecurityByGard(long id);
 
 }

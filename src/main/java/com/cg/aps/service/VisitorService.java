@@ -124,9 +124,9 @@ public class VisitorService implements VisitorServiceInt{
 		return vis;
 	}
 
-
-	@Override
-	public List<VisitorEntity> getVisitorByGardId(long id) {
-		return visRepo.getVisitorByGard(id);
-	}
+	//method to get visitor using gard id
+		@Override
+		public List<VisitorEntity> getVisitorByGardId(long id) {
+			return visRepo.getVisitorByGard(id);
+		}
 }
