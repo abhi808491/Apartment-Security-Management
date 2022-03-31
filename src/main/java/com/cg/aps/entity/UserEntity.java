@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -24,17 +26,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity extends BaseEntity {
-
+	
+	@NotBlank(message = "First name should not be empty")
 	private String firstName;
 
 	private String lastName;
 
+	@Positive(message = "Id can not be less than or equal to zero")
 	private String loginId;
-
+	 @NotNull
+	 
 	private String password;
 
+	@Size(min = 10, max = 10, message = "enter a valid mobileNo number")
 	private String mobileNo;
-
+	
+	@Email
 	private String emailId;
 
 	private long roleId;
