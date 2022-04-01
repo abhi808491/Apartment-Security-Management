@@ -41,9 +41,10 @@ public class FlatEntity extends BaseEntity {
 	private List<VisitorEntity> visitorEntity;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "rent_id")
-	FlatRentEntity flatrent;
+	private FlatRentEntity flatrent;
 		
 	@OneToOne(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
 	private UserEntity user;
 	
 	@OneToMany(mappedBy="flat",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -51,7 +52,7 @@ public class FlatEntity extends BaseEntity {
 	private List<VehicleEntity> vehicle;
 
 	@ManyToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name = "flat_id", referencedColumnName = "id")
+	@JoinColumn(name = "domestic_help_id", referencedColumnName = "id")
 	private DomesticHelpEntity domesticHelpList;
 	
 	@Override

@@ -20,7 +20,7 @@ public class FlatRentEntity extends BaseEntity
 	private String type;
 
 	@OneToOne(mappedBy="flatrent")
-	FlatEntity flat;
+	FlatEntity flatEntity;
 	
 	@Override
 	public String getKey() {

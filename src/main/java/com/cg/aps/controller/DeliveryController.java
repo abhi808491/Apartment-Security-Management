@@ -88,13 +88,6 @@ public class DeliveryController {
 
 	}
 
-	// find deliveryList By guardId
-	@GetMapping("deliveryListByguard/{guardId}")
-	ResponseEntity<List<DeliveryEntity>> getDeliveriesByGuardId(@PathVariable("guardId") Long guardId) {
-		List<DeliveryEntity> delEnt = deliveryService.getDeliveryListByGuardId(guardId);
-		return new ResponseEntity<>(delEnt, HttpStatus.OK);
-
-	}
 
 	// add flat to delivery
 	@GetMapping("mapflattodelivery/{deliveryId}/{flatId}")
