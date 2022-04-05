@@ -62,9 +62,9 @@ public class UserController {
 	}
 
 	// delete users
-	@DeleteMapping("/deleteUsers")
-	public ResponseEntity<UserEntity> delete(@RequestBody UserEntity bean) {
-		userServ.delete(bean);
+	@DeleteMapping("/deleteUsers/{adminPk}")
+	public ResponseEntity<UserEntity> delete(@RequestBody UserEntity bean,@PathVariable("adminPk") long adminPk) {
+		userServ.delete(bean,adminPk);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	// update password
