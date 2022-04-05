@@ -169,34 +169,9 @@ public class GardTraineeService implements GardTraineeServiceInt {
 		return gardsTraineeDAOInt.save(gard);
 
 	}
-
-	// method to get visitor using gard id
-	@Override
-	public List<VisitorEntity> getVisitorByGardId(long id) {
-		return visRepo.getVisitorByGard(id);
-	}
-
-	// method to get domesticHelp using gardId
-	@Override
-	public List<DomesticHelpEntity> getDomesticHelpByGardId(long id) {
-		return domesticHelpDAOInt.getDomesticHelpListByGuardId(id);
-	}
-
-	// method to get delivery using gardId
-	@Override
-	public List<DeliveryEntity> getDeliveryListByGardId(long id) {
-		return deliveryDAOInt.getDeliveryListByGuardId(id);
-	}
-
-	@Override
-	public List<SecurityEntity> getSecurityByGard(long id) {
-		return secRepo.getSecurityByGard(id);
-	}
 	
-	@Override
-	public List<VehicleEntity> getVehicleByGardId(long gardId)
-	{
-		return vehRepo.getVehicleByGardId(gardId);
-	}
+
+	
+
 
 }

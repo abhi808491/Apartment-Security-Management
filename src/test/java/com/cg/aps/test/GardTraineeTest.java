@@ -118,32 +118,6 @@ public class GardTraineeTest {
 		assertEquals("Ankit kumar", gardList.get(0).getName());
 	}
 
-	@Test
-	void getDomesticHelpByGardId() {
-		List<DomesticHelpEntity> list = gardsTranningServ.getDomesticHelpByGardId(1);
-		assertEquals("Vinod", list.get(0).getName());
-		assertEquals("Ronit", list.get(1).getName());
-	}
-
-	@Test
-	void getDeliveryListByGardId() {
-		List<DeliveryEntity> list = gardsTranningServ.getDeliveryListByGardId(2);
-		assertEquals("Ram Krishina", list.get(0).getOwnerName());
-		assertEquals("Delivered", list.get(0).getStatus());
-	}
-
-	@Test
-	void getVisitorByGardId() {
-		List<VisitorEntity> list = gardsTranningServ.getVisitorByGardId(9);
-		assertEquals("Eahul", list.get(0).getVisitorName());
-		assertEquals("Sabnam", list.get(1).getVisitorName());
-	}
-
-	@Test
-	void getSecurityByGard() {
-		List<SecurityEntity> list = gardsTranningServ.getSecurityByGard(2);
-		assertEquals("Abhishek Kumar", list.get(0).getCreatedBy());
-		assertEquals("Fire alert", list.get(0).getAlert());
-	}
+	
 
 }
