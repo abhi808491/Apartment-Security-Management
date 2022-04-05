@@ -10,7 +10,7 @@ public interface UserServiceInt {
 
 	public void update(UserEntity bean);
 
-	public void delete(UserEntity bean);
+	public void delete(UserEntity bean,long adminPk);
 
 	public UserEntity findByLogin(String login);
 

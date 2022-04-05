@@ -72,13 +72,20 @@ public class UserService implements UserServiceInt {
 	}
 
 	@Override
-	public void delete(UserEntity bean) {
+	public void delete(UserEntity bean,long adminPk) {
 		Optional<UserEntity> user = userDao.findById(bean.getId());
+		UserEntity admin = userDao.getById(adminPk);
 		if (!user.isPresent()) {
-			throw new RecordNotFoundException("Record not found with given entity details");
+			throw new DuplicateRecordException("Record not exist in database");
+		} else {
+			if (admin.getRoleId() == 1) {
+				userDao.delete(bean);
+			} else {
+				throw new ApplicationException("You are not an Admin!");
+			}
 		}
-		userDao.delete(bean);
 	}
+	
 
 	@Override
 	public UserEntity findByLogin(String login) {

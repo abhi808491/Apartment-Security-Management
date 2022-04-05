@@ -24,7 +24,9 @@ package com.cg.aps.test;
 		void delete()
 		{
 			UserEntity user=userServ.findByPk(7);
-			userServ.delete(user);
+			UserEntity admin=userServ.findByPk(1);
+			if(admin.getRoleId()==1)
+			userServ.delete(user,admin.getId());
 			
 			
 		}

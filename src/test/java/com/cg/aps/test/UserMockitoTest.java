@@ -80,6 +80,7 @@ class UserMockitoTest {
 	@Test
 	void deleteTest() {
 		UserEntity user = new UserEntity();
+		
 		user.setId(5);
 		user.setCreatedBy("Ram");
 		user.setModifiedBy("");
@@ -91,7 +92,14 @@ class UserMockitoTest {
 		user.setPassword("ram");
 		user.setLastName("Kumar");
 		Mockito.when(userDao.findById((long) 5)).thenReturn(Optional.of(user));
-		userServ.delete(user);
+		
+		UserEntity admin=new UserEntity();
+		admin.setId(2);
+		admin.setFirstName("Ram");
+		admin.setRoleId(1);
+		Mockito.when(userDao.findById((long) 2)).thenReturn(Optional.of(admin));
+		if(admin.getRoleId()==1)
+		userServ.delete(user,admin.getId());
 
 	}
 
