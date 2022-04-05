@@ -16,6 +16,7 @@ import com.cg.aps.entity.GardSalaryEntity;
 import com.cg.aps.entity.GardShiftEntity;
 import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.DatabaseException;
 import com.cg.aps.exception.DuplicateRecordException;
@@ -26,6 +27,7 @@ import com.cg.aps.repository.GardSalaryDAOInt;
 import com.cg.aps.repository.GardShiftDAOInt;
 import com.cg.aps.repository.GardTraineeDAOInt;
 import com.cg.aps.repository.SecurityDAOInt;
+import com.cg.aps.repository.VehicleRepository;
 import com.cg.aps.repository.VisitorDAOInt;
 
 @Service
@@ -45,12 +47,15 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	@Autowired
 	DomesticHelpDAOInt domesticHelpDAOInt;
-	
+
 	@Autowired
 	DeliveryDAOInt deliveryDAOInt;
-	
+
 	@Autowired
 	SecurityDAOInt secRepo;
+	
+	@Autowired
+	VehicleRepository vehRepo;
 
 	// method to add gard
 	@Override
@@ -129,7 +134,7 @@ public class GardTraineeService implements GardTraineeServiceInt {
 		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
 		} else {
-			throw new DatabaseException("DataBase not found");
+			throw new RecordNotFoundException("DataBase not found");
 		}
 
 	}
@@ -165,19 +170,19 @@ public class GardTraineeService implements GardTraineeServiceInt {
 
 	}
 
-	//method to get visitor using gard id
+	// method to get visitor using gard id
 	@Override
 	public List<VisitorEntity> getVisitorByGardId(long id) {
 		return visRepo.getVisitorByGard(id);
 	}
 
-	//method to get domesticHelp using gardId
+	// method to get domesticHelp using gardId
 	@Override
 	public List<DomesticHelpEntity> getDomesticHelpByGardId(long id) {
 		return domesticHelpDAOInt.getDomesticHelpListByGuardId(id);
 	}
 
-	//method to get delivery using gardId
+	// method to get delivery using gardId
 	@Override
 	public List<DeliveryEntity> getDeliveryListByGardId(long id) {
 		return deliveryDAOInt.getDeliveryListByGuardId(id);
@@ -186,6 +191,12 @@ public class GardTraineeService implements GardTraineeServiceInt {
 	@Override
 	public List<SecurityEntity> getSecurityByGard(long id) {
 		return secRepo.getSecurityByGard(id);
+	}
+	
+	@Override
+	public List<VehicleEntity> getVehicleByGardId(long gardId)
+	{
+		return vehRepo.getVehicleByGardId(gardId);
 	}
 
 }

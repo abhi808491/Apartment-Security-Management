@@ -1,16 +1,12 @@
 package com.cg.aps.entity;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.PrimaryKeyJoinColumn;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,7 +31,11 @@ public class VehicleEntity extends BaseEntity {
 	@JoinColumn(name="flat_id",referencedColumnName="id")
 	@JsonIgnore
 	private FlatEntity flat;
-
+	
+	@ManyToOne(cascade= CascadeType.MERGE,fetch=FetchType.LAZY)
+	@JoinColumn(name="gard_id",referencedColumnName="id")
+	@JsonIgnore
+	private GardTraineeEntity trainee;
 
 	@Override
 	public String getKey() {

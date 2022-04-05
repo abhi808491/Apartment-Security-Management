@@ -46,7 +46,7 @@ class GardTraineeMockitoTest {
 		gard.setDate(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
 		Mockito.when(gardsTraineeDAOInt.save(gard)).thenReturn(gard);
 		long id = gardsTranningServ.addGard(gard);
-		assertEquals(id,gard.getId());
+		assertEquals(id, gard.getId());
 		assertEquals("Ranjan", gard.getCreatedBy());
 		assertEquals("8051148432", gard.getMobileNo());
 
@@ -76,7 +76,7 @@ class GardTraineeMockitoTest {
 	@Test
 	void deleteTest() {
 		GardTraineeEntity gard = new GardTraineeEntity();
-		
+
 		// adding trainee
 		gard.setId(6);
 		gard.setCreatedBy("Ranjan");
@@ -89,15 +89,14 @@ class GardTraineeMockitoTest {
 		gard.setMobileNo("8051148432");
 		gard.setStatus("under training");
 		gard.setTimeing("9AM");
-		
-		//handeling void
-		
+
+		// handeling void
+
 		Mockito.when(gardsTraineeDAOInt.findById((long) 6)).thenReturn(Optional.of(gard));
 		Mockito.doNothing().when(gardsTraineeDAOInt).delete(gard);
-		
-		//deleteing
+
+		// deleteing
 		gardsTranningServ.delete(gard);
-		
 
 	}
 

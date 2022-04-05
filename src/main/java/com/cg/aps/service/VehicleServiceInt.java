@@ -24,6 +24,10 @@ public interface VehicleServiceInt {
 	
 	public List<VehicleEntity> getVehicleByFlatId(Long flatId);
 	
-	public VehicleEntity addVehicle(long vehiclePk, long flatPk);
+	public VehicleEntity mapVehicle(long vehiclePk, long flatPk);
+
+	public VehicleEntity mapGard(long vehiclePk, long gardPk);
+
+	public List<VehicleEntity> getVehicleByGardId(long gardId);
 	}
 

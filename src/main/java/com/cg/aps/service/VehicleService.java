@@ -6,16 +6,19 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import com.cg.aps.entity.BaseEntity;
 import com.cg.aps.entity.FlatEntity;
+import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.UserEntity;
 import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
 import com.cg.aps.repository.FlatDAOInt;
+import com.cg.aps.repository.GardTraineeDAOInt;
 import com.cg.aps.repository.VehicleRepository;
 @Service
 public class VehicleService implements VehicleServiceInt{
@@ -26,6 +29,9 @@ public class VehicleService implements VehicleServiceInt{
 	
 	@Autowired
 	 FlatDAOInt flatDAOint;
+	
+	@Autowired
+	GardTraineeDAOInt gardTraineeDaoInt;
 	
 	@Override
 	public long add(VehicleEntity bean) {
@@ -120,7 +126,7 @@ public class VehicleService implements VehicleServiceInt{
 		}
 
 	@Override
-	public VehicleEntity addVehicle(long vehiclePk, long flatPk) {
+	public VehicleEntity mapVehicle(long vehiclePk, long flatPk) {
 		
 		VehicleEntity vehicle=vehRepo.getById(vehiclePk);
 		FlatEntity flat=flatDAOint.getById(flatPk);
@@ -128,5 +134,22 @@ public class VehicleService implements VehicleServiceInt{
 		 vehRepo.save(vehicle);
 		 return vehicle;
 	}
+	
+	@Override
+	public VehicleEntity mapGard(long vehiclePk, long gardPk) {
+		
+		VehicleEntity vehicle=vehRepo.getById(vehiclePk);
+		GardTraineeEntity gard= gardTraineeDaoInt.getById(gardPk);
+		 vehicle.setTrainee(gard);
+		 vehRepo.save(vehicle);
+		 return vehicle;
+	}
+	
+	@Override
+	public List<VehicleEntity> getVehicleByGardId( long gardId)
+	{
+		return vehRepo.getVehicleByGardId(gardId);
+	}
+	
 
 }

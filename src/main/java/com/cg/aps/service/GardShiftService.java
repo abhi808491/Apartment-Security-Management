@@ -21,7 +21,7 @@ public class GardShiftService implements GardShiftServiceInt {
 	@Autowired
 	GardShiftDAOInt gardShiftDAOInt;
 
-	//method to add shift
+	// method to add shift
 	@Override
 	public long add(GardShiftEntity bean) {
 		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
@@ -32,7 +32,7 @@ public class GardShiftService implements GardShiftServiceInt {
 		return bean.getId();
 	}
 
-	//method to update shift
+	// method to update shift
 	@Override
 	public void update(GardShiftEntity bean) {
 		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
@@ -43,7 +43,7 @@ public class GardShiftService implements GardShiftServiceInt {
 
 	}
 
-	//method to delete shift
+	// method to delete shift
 	@Override
 	public void delete(GardShiftEntity bean) {
 		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());
@@ -54,7 +54,7 @@ public class GardShiftService implements GardShiftServiceInt {
 
 	}
 
-	//method to get shift by name
+	// method to get shift by name
 	@Override
 	public GardShiftEntity getByName(String name) {
 		GardShiftEntity gard = gardShiftDAOInt.findByName(name);
@@ -64,7 +64,7 @@ public class GardShiftService implements GardShiftServiceInt {
 		return gardShiftDAOInt.findByName(name);
 	}
 
-	//method to get shift by primary key
+	// method to get shift by primary key
 	@Override
 	public GardShiftEntity findByPk(long id) {
 		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(id);
@@ -74,7 +74,7 @@ public class GardShiftService implements GardShiftServiceInt {
 		return gardShiftDAOInt.getById(id);
 	}
 
-	//method to get paging
+	// method to get paging
 	@Override
 	public List<GardShiftEntity> search(long pageNo, int pageSize) {
 		PageRequest paging = PageRequest.of((int) pageNo, pageSize);
@@ -82,11 +82,11 @@ public class GardShiftService implements GardShiftServiceInt {
 		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
 		} else {
-			throw new DatabaseException("DataBase not found");
+			throw new RecordNotFoundException("DataBase not found");
 		}
 	}
 
-	//method to seravh gard using gard object
+	// method to seravh gard using gard object
 	@Override
 	public List<GardShiftEntity> search(GardShiftEntity bean) {
 		Optional<GardShiftEntity> gard = gardShiftDAOInt.findById(bean.getId());

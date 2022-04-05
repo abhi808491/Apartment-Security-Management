@@ -83,7 +83,7 @@ public class GardSalaryService implements GardSalaryServiceInt {
 		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
 		} else {
-			throw new DatabaseException("DataBase not found");
+			throw new RecordNotFoundException("DataBase not found");
 		}
 	}
 

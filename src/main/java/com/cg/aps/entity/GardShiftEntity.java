@@ -25,7 +25,7 @@ public class GardShiftEntity extends BaseEntity {
 	private Date date;
 
 	// relationship between gardShift and gard training
-	@OneToMany(mappedBy="gardShift",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "gardShift", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<GardTraineeEntity> gardList;
 
