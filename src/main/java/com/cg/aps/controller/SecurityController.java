@@ -19,57 +19,55 @@ import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.service.SecurityServiceInt;
 
-
 @RestController
 public class SecurityController {
 	@Autowired
 	SecurityServiceInt secServ;
-	
+
 	@PostMapping("/addSecurity")
 	public ResponseEntity<Long> add(@RequestBody SecurityEntity security) {
-			Long alertId = secServ.add(security);
-			return new ResponseEntity<>(alertId,HttpStatus.OK);
-		
+		Long alertId = secServ.add(security);
+		return new ResponseEntity<>(alertId, HttpStatus.OK);
+
 	}
-	
+
 	@PutMapping("/updateSecurity")
 	public ResponseEntity<String> updating(@RequestBody SecurityEntity security) {
-			secServ.update(security);
-			return new ResponseEntity<>("updated successfully",HttpStatus.OK);
+		secServ.update(security);
+		return new ResponseEntity<>("updated successfully", HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/deleteSecurity")
 	public ResponseEntity<String> deletesec(@PathVariable Integer id) {
-			SecurityEntity sec = secServ.findByPk(id);
-			secServ.delete(sec);
-			return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
+		SecurityEntity sec = secServ.findByPk(id);
+		secServ.delete(sec);
+		return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/Security/{Id}")
-	public ResponseEntity<SecurityEntity> getAlertById(@PathVariable Integer Id){
-			SecurityEntity sec = secServ.findByPk(Id);
-			return new ResponseEntity<>(sec,HttpStatus.OK);
+	public ResponseEntity<SecurityEntity> getAlertById(@PathVariable Integer Id) {
+		SecurityEntity sec = secServ.findByPk(Id);
+		return new ResponseEntity<>(sec, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/Security/search")
-	public ResponseEntity<List<SecurityEntity>> getAllAlerts(@RequestBody SecurityEntity sec){
-			List<SecurityEntity> secList = secServ.search(sec);
-			return new ResponseEntity<>(secList,HttpStatus.OK);
+	public ResponseEntity<List<SecurityEntity>> getAllAlerts(@RequestBody SecurityEntity sec) {
+		List<SecurityEntity> secList = secServ.search(sec);
+		return new ResponseEntity<>(secList, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/Security/{pageNo}/{pageSize}")
-	public ResponseEntity<List<SecurityEntity>> getAlerts(@RequestBody SecurityEntity sec, @PathVariable Integer pageNo,@PathVariable Integer pageSize){
-			List<SecurityEntity> alertList = secServ.search(sec, pageNo, pageSize);
-			return new ResponseEntity<>(alertList,HttpStatus.OK);
-		
+	public ResponseEntity<List<SecurityEntity>> getAlerts(@RequestBody SecurityEntity sec, @PathVariable Integer pageNo,
+			@PathVariable Integer pageSize) {
+		List<SecurityEntity> alertList = secServ.search(sec, pageNo, pageSize);
+		return new ResponseEntity<>(alertList, HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping("/SecurityToGard/{securityId}/{gardId}")
-	public ResponseEntity<SecurityEntity> addRelation(@PathVariable Long securityId,@PathVariable Long gardId){
-			SecurityEntity security = secServ.addRelation(securityId, gardId);
-			return new ResponseEntity<>(security,HttpStatus.OK);
-}
-	
-	
-		
+	public ResponseEntity<SecurityEntity> addRelation(@PathVariable Long securityId, @PathVariable Long gardId) {
+		SecurityEntity security = secServ.addRelation(securityId, gardId);
+		return new ResponseEntity<>(security, HttpStatus.OK);
+	}
+
 }

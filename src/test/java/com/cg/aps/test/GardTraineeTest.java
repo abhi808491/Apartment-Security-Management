@@ -30,10 +30,10 @@ public class GardTraineeTest {
 
 	public GardTraineeEntity addGardShift() {
 		GardTraineeEntity gard = new GardTraineeEntity();
-		gard.setId(79);
+		gard.setId(10);
 		gard.setCreatedBy("Ranjan");
 		gard.setCreatedDateTime(java.sql.Timestamp.valueOf("2022-03-24 10:10:10.0"));
-		gard.setUserId(18);
+		gard.setUserId(20);
 		gard.setName("Navin");
 		gard.setMobileNo("7004657498");
 		gard.setStatus("underTraining");
@@ -48,8 +48,7 @@ public class GardTraineeTest {
 	void add() {
 		GardTraineeEntity gard = addGardShift();
 		assertEquals("Ranjan", gard.getCreatedBy());
-		// assertEquals("9AM", gard.getTimeing());
-		assertEquals(79, gard.getId());
+		assertEquals(10, gard.getId());
 
 	}
 
@@ -115,36 +114,33 @@ public class GardTraineeTest {
 	@Test
 	void getAllGardTraineeByShiftId() {
 		List<GardTraineeEntity> gardList = gardsTranningServ.getAllGardTraineeByShiftId(21);
-		assertEquals("Rohith Sai", gardList.get(1).getName());
+		assertEquals("Ateq", gardList.get(1).getName());
 		assertEquals("Ankit kumar", gardList.get(0).getName());
 	}
+
 	@Test
-	void getDomesticHelpByGardId()
-	{
+	void getDomesticHelpByGardId() {
 		List<DomesticHelpEntity> list = gardsTranningServ.getDomesticHelpByGardId(1);
 		assertEquals("Vinod", list.get(0).getName());
 		assertEquals("Ronit", list.get(1).getName());
 	}
-	
+
 	@Test
-	void getDeliveryListByGardId()
-	{
+	void getDeliveryListByGardId() {
 		List<DeliveryEntity> list = gardsTranningServ.getDeliveryListByGardId(2);
 		assertEquals("Ram Krishina", list.get(0).getOwnerName());
 		assertEquals("Delivered", list.get(0).getStatus());
 	}
-	
+
 	@Test
-	void getVisitorByGardId()
-	{
+	void getVisitorByGardId() {
 		List<VisitorEntity> list = gardsTranningServ.getVisitorByGardId(9);
 		assertEquals("Eahul", list.get(0).getVisitorName());
 		assertEquals("Sabnam", list.get(1).getVisitorName());
 	}
-	
+
 	@Test
-	void getSecurityByGard()
-	{
+	void getSecurityByGard() {
 		List<SecurityEntity> list = gardsTranningServ.getSecurityByGard(2);
 		assertEquals("Abhishek Kumar", list.get(0).getCreatedBy());
 		assertEquals("Fire alert", list.get(0).getAlert());

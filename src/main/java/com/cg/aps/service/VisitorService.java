@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.cg.aps.entity.FlatEntity;
 import com.cg.aps.entity.GardTraineeEntity;
+import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.exception.DuplicateRecordException;
 import com.cg.aps.exception.RecordNotFoundException;
@@ -129,4 +131,5 @@ public class VisitorService implements VisitorServiceInt{
 		public List<VisitorEntity> getVisitorByGardId(long id) {
 			return visRepo.getVisitorByGard(id);
 		}
+		
 }

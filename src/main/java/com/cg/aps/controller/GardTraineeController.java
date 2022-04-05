@@ -19,11 +19,13 @@ import com.cg.aps.entity.DeliveryEntity;
 import com.cg.aps.entity.DomesticHelpEntity;
 import com.cg.aps.entity.GardTraineeEntity;
 import com.cg.aps.entity.SecurityEntity;
+import com.cg.aps.entity.VehicleEntity;
 import com.cg.aps.entity.VisitorEntity;
 import com.cg.aps.service.DeliveryServiceInt;
 import com.cg.aps.service.DomesticHelpServiceInt;
 import com.cg.aps.service.GardTraineeServiceInt;
 import com.cg.aps.service.SecurityServiceInt;
+import com.cg.aps.service.VehicleServiceInt;
 import com.cg.aps.service.VisitorServiceInt;
 
 @RestController
@@ -42,6 +44,9 @@ public class GardTraineeController {
 
 	@Autowired
 	SecurityServiceInt secServ;
+	
+	@Autowired
+	VehicleServiceInt vehServ;
 
 	// search gard
 	@PostMapping("/searchgards")
@@ -144,5 +149,13 @@ public class GardTraineeController {
 		return new ResponseEntity<>(lis, HttpStatus.OK);
 
 	}
-
+	
+	//get vehicle using gard id
+	@GetMapping("/getVehicleByGard/{gardId}")
+	ResponseEntity<List<VehicleEntity>> getVehicleByGardId(@PathVariable("gardId") long gardId)
+	{
+		List<VehicleEntity> list=vehServ.getVehicleByGardId(gardId);
+		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
 }

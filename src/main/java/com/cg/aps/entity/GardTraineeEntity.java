@@ -37,36 +37,38 @@ public class GardTraineeEntity extends BaseEntity {
 	private String status;
 	private String timeing;
 	private Date date;
-	
+
 //Relationship between user and gardTrainee
-	@OneToOne(mappedBy="gard",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "gard", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private UserEntity user;
-	
-	
+
 	// relationship between gardtraining and gardshift
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name="shift_id")
+	@JoinColumn(name = "shift_id")
 	@JsonIgnore
 	private GardShiftEntity gardShift;
-	
-	
+
 	// relationship between gardtraining and gardsalary
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="salary_id")
+	@JoinColumn(name = "salary_id")
 	@JsonIgnore
 	private GardSalaryEntity gardSalary;
-	
-	
-	//relationship between delivery and guardTrainee
+
+	// relationship between delivery and guardTrainee
 	@JsonIgnore
-	@OneToMany(mappedBy = "guardTrainee",cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "guardTrainee", cascade = CascadeType.MERGE)
 	private List<DeliveryEntity> deliveryList;
+
+	// relationship between domesticHelp and guardTrainee
+	@JsonIgnore
+	@OneToMany(mappedBy = "guardTrainee", cascade = CascadeType.MERGE)
+	private List<DomesticHelpEntity> domesticHelpList;
 	
-	//relationship between domesticHelp and guardTrainee
-		@JsonIgnore
-		@OneToMany(mappedBy = "guardTrainee",cascade = CascadeType.MERGE)
-		private List<DomesticHelpEntity> domesticHelpList;
+	//relationship between gard and vehicle
+	@OneToMany(mappedBy = "trainee", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<VehicleEntity> vehicleList;
 
 	@Override
 	public String getKey() {

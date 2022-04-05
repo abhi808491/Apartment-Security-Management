@@ -75,9 +75,15 @@ return new ResponseEntity<>( HttpStatus.OK);
 		return new ResponseEntity<>(vehEnt,HttpStatus.OK);
 	}
 	
-	@GetMapping("/addVehicle/{vehiclePk}/{flatPk}")
-	public VehicleEntity addVehicle(@PathVariable("vehiclePk") long vehiclePk,@PathVariable("flatPk") long flatPk) {
-		return vehServ.addVehicle(vehiclePk,flatPk );
+	@GetMapping("/mapFlat/{vehiclePk}/{flatPk}")
+	public VehicleEntity mapVehicle(@PathVariable("vehiclePk") long vehiclePk,@PathVariable("flatPk") long flatPk) {
+		return vehServ.mapVehicle(vehiclePk,flatPk );
+	}
+	
+	@GetMapping("/mapGard/{vehiclePk}/{gardPk}")
+	public VehicleEntity mapGard(@PathVariable("vehiclePk") long vehiclePk,@PathVariable("gardPk") long gardPk)
+	{
+		return vehServ.mapGard(vehiclePk, gardPk);
 	}
 	
 }
