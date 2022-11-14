@@ -16,8 +16,8 @@ public interface GardSalaryServiceInt {
 
 	public GardSalaryEntity findByPk(long id);
 
-	public List<GardSalaryEntity> search(GardSalaryEntity bean, long pageNo, int pageSize);
+	public List<GardSalaryEntity> search(long pageNo, int pageSize);
 
-	public GardSalaryEntity search(GardSalaryEntity bean);
+	public List<GardSalaryEntity> search(GardSalaryEntity bean);
 
 }
